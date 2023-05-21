@@ -1,19 +1,19 @@
 import express from 'express'
-import { createServer } from 'http'
 import { Server } from 'socket.io'
 
 const app = express()
-const server = createServer(app)
-const io = new Server(server)
-
-app.get('/', (req, res) => {
-  return res.send('hello world')
+const expressServer = app.listen(8081, () => {
+  console.log('express server 啟動')
+})
+const io = new Server(expressServer, {
+  cors: {
+    origin: 'http://localhost:3000',
+  },
 })
 
-io.on('connection', () => {
-  console.log('connect')
-})
-
-server.listen(3000, () => {
-  console.log('API is linstening on port 3000')
+io.on('connection', socket => {
+  console.log(socket)
+  socket.emit('dataFrom', {
+    test: 'hello',
+  })
 })
