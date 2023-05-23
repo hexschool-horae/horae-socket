@@ -1,5 +1,9 @@
 import express from 'express'
 import { Server } from 'socket.io'
+import { BOARD } from './types/sockets.namespace'
+
+// controller
+import boardController from './controllers/boardController'
 
 const app = express()
 const expressServer = app.listen(8081, () => {
@@ -10,10 +14,4 @@ const io = new Server(expressServer, {
     origin: 'http://localhost:3000',
   },
 })
-
-io.on('connection', socket => {
-  console.log(socket)
-  socket.emit('dataFrom', {
-    test: 'hello',
-  })
-})
+boardController(io.of(BOARD))
