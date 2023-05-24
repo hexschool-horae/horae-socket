@@ -10,6 +10,11 @@ const instance: AxiosInstance = axios.create({
   timeout: 5000,
 })
 
+// 強制 payload 一定要帶 token
+interface authRequest {
+  token: string
+}
+
 const onRequest = (config: InternalAxiosRequestConfig) => {
   return config
 }
@@ -25,20 +30,20 @@ const onResponse = (response: AxiosResponse) => {
 instance.interceptors.request.use(onRequest, onErrorResponse)
 instance.interceptors.response.use(onResponse, onErrorResponse)
 
-function get<T>(url: string, params?: object): Promise<T> {
-  return instance.get<T>(url, { params }).then((response: AxiosResponse<T>) => response.data)
+function get<T extends authRequest>(url: string, params?: object): Promise<AxiosResponse> {
+  return instance.get<T>(url, { params }).then((response: AxiosResponse) => Promise.resolve(response.data))
 }
 
-function post<T>(url: string, data?: object): Promise<T> {
-  return instance.post<T>(url, data).then((response: AxiosResponse<T>) => response.data)
+function post<T extends authRequest>(url: string, data?: object): Promise<AxiosResponse> {
+  return instance.post<T>(url, data).then((response: AxiosResponse) => Promise.resolve(response.data))
 }
 
-function patch<T>(url: string, data?: object): Promise<T> {
-  return instance.patch<T>(url, data).then((response: AxiosResponse<T>) => response.data)
+function patch<T extends authRequest>(url: string, data?: object): Promise<AxiosResponse> {
+  return instance.patch<T>(url, data).then((response: AxiosResponse) => Promise.resolve(response.data))
 }
 
-function del<T>(url: string): Promise<T> {
-  return instance.delete<T>(url).then((response: AxiosResponse<T>) => response.data)
+function del<T extends authRequest>(url: string): Promise<T> {
+  return instance.delete<T>(url).then((response: AxiosResponse) => Promise.resolve(response.data))
 }
 
 export default {
