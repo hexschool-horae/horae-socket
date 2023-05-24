@@ -30,20 +30,20 @@ const onResponse = (response: AxiosResponse) => {
 instance.interceptors.request.use(onRequest, onErrorResponse)
 instance.interceptors.response.use(onResponse, onErrorResponse)
 
-function get<T extends authRequest>(url: string, params?: object): Promise<AxiosResponse> {
+function get<T extends authRequest>(url: string, params: T): Promise<AxiosResponse> {
   return instance.get<T>(url, { params }).then((response: AxiosResponse) => Promise.resolve(response.data))
 }
 
-function post<T extends authRequest>(url: string, data?: object): Promise<AxiosResponse> {
+function post<T extends authRequest>(url: string, data: T): Promise<AxiosResponse> {
   return instance.post<T>(url, data).then((response: AxiosResponse) => Promise.resolve(response.data))
 }
 
-function patch<T extends authRequest>(url: string, data?: object): Promise<AxiosResponse> {
+function patch<T extends authRequest>(url: string, data: T): Promise<AxiosResponse> {
   return instance.patch<T>(url, data).then((response: AxiosResponse) => Promise.resolve(response.data))
 }
 
-function del<T extends authRequest>(url: string): Promise<T> {
-  return instance.delete<T>(url).then((response: AxiosResponse) => Promise.resolve(response.data))
+function del<T extends authRequest>(url: string, params: T): Promise<AxiosResponse> {
+  return instance.delete<T>(url, { params }).then((response: AxiosResponse) => Promise.resolve(response.data))
 }
 
 export default {
