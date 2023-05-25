@@ -16,6 +16,13 @@ interface authRequest {
 }
 
 const onRequest = (config: InternalAxiosRequestConfig) => {
+  const controller = new AbortController()
+  const { data } = config
+  const { token } = data
+  if (!token) {
+    controller.abort()
+  }
+  instance.defaults.headers.common['Authorization'] = `Bearer ${token}`
   return config
 }
 
