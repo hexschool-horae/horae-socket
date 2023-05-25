@@ -29,9 +29,9 @@ const onRequest = (config: InternalAxiosRequestConfig) => {
     }
     return ''
   })()
-  if (!token) {
-    return Promise.reject('該請求沒有 token')
-  }
+  // if (!token) {
+  //   return Promise.reject('該請求沒有 token')
+  // }
   config.headers.Authorization = token
   return config
 }
