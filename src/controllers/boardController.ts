@@ -38,10 +38,12 @@ const boardController = (namespace: Namespace) => {
           boardId,
           token,
         })
+        console.log('result = ', result)
         namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.BOARD_CREATE_LIST_SUCCESS, {
           result,
         })
       } catch (e) {
+        console.log('create-board-error', e)
         handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.BOARD_CREATE_LIST_FAILED)
       }
     })
