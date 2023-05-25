@@ -16,13 +16,23 @@ interface authRequest {
 }
 
 const onRequest = (config: InternalAxiosRequestConfig) => {
-  const controller = new AbortController()
-  const { data } = config
-  const { token } = data
+  const method = config.method as string
+  const token = (() => {
+    if (['post', 'patch'].indexOf(method) > -1) {
+      const token = config.data.token as string
+      delete config.data.token
+      return token
+    } else if (['get', 'delete'].indexOf(method) > -1) {
+      const token = config.params.token as string
+      delete config.params.token
+      return token
+    }
+    return ''
+  })()
   if (!token) {
-    controller.abort()
+    return Promise.reject('該請求沒有 token')
   }
-  instance.defaults.headers.common['Authorization'] = `Bearer ${token}`
+  config.headers.Authorization = token
   return config
 }
 
