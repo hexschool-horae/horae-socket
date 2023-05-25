@@ -7,5 +7,6 @@ import * as interfaces from '../interface/api'
 // }
 
 export const POST_BOARD_LIST_BY_ID = (payload: interfaces.IPostBoardListRequest) => {
-  return axios.post<interfaces.IPostBoardListRequest>(apiPath.POST_BOARD_LIST_BY_ID, payload)
+  const url = apiPath.POST_BOARD_LIST_BY_ID.replace(':board-id', payload.boardId)
+  return axios.post<interfaces.IPostBoardListRequest>(url, payload)
 }
