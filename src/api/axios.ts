@@ -7,7 +7,6 @@ const instance: AxiosInstance = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 5000,
 })
 
 // 強制 payload 一定要帶 token
