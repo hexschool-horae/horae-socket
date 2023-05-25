@@ -33,6 +33,7 @@ export default {
   POST_CARD_ATTACH_BY_ID: '/card/:card-id/attach',
 
   // 實作開始
+  GET_BOARD_BY_BOARD_ID: '/board/:board-id',
   POST_BOARD_LIST_BY_ID: '/board/:board-id/list',
   PATCH_BOARD_LIST_BY_ID: '/board/:board-id/list/:list-id',
   PATCH_BOARD_LIST_VISIBLE_BY_ID: '/board/:board-id/list/:list-id/visable',
