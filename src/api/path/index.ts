@@ -1,10 +1,4 @@
 export default {
-  POST_SIGN_UP: '/user/sign-up',
-  POST_USER_LOGIN: '/user/login',
-  PATCH_USER_EMAIL_VERIFY: '/user/email-verify',
-  POST_USER_FORGOT_PWD: '/user/forgot-pwd',
-  POST_USER_LOGIN_GOOGLE: '/user/login-google',
-  POST_USER_LOGOUT: '/user/logout',
   PATCH_USER_PROFILE: '/user/profile',
   GET_USER_PROFILE: '/user/profile',
   GET_USER_BOARDS: '/user/boards',
@@ -32,13 +26,15 @@ export default {
   POST_BOARD_COVER_BY_ID: '/board/:board-id/cover',
   PUT_BOARD_COVER_BY_ID: '/board/:board-id/cover',
   DELETE_BOARD_COVER_BY_ID: '/board/:board-id/cover',
-  POST_BOARD_LIST_BY_ID: '/board/:board-id/list',
-  PATCH_BOARD_LIST_BY_ID: '/board/:board-id/list/:list-id',
-  PATCH_BOARD_LIST_VISIBLE_BY_ID: '/board/:board-id/list/:list-id/visable',
-  GET_BOARD_LIST_BY_ID: '/board/:board-id/list',
   POST_LIST_CARD_BY_ID: '/list/:list-id/card',
   PUT_CARD_BY_ID: '/card/:card-id',
   PATCH_CARD_VISIBLE_BY_ID: '/card/:card-id/visible',
   GET_CARD_BY_ID: '/card/:card-id',
   POST_CARD_ATTACH_BY_ID: '/card/:card-id/attach',
+
+  // 實作開始
+  POST_BOARD_LIST_BY_ID: '/board/:board-id/list',
+  PATCH_BOARD_LIST_BY_ID: '/board/:board-id/list/:list-id',
+  PATCH_BOARD_LIST_VISIBLE_BY_ID: '/board/:board-id/list/:list-id/visable',
+  GET_BOARD_LIST_BY_ID: '/board/:board-id/list',
 }
