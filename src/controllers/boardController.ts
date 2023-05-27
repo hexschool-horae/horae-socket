@@ -1,7 +1,7 @@
 import { Namespace } from 'socket.io'
 import socketInterface from '../types/sockets'
 import { SOCKET_EVENTS_ENUM } from '../types/sockets.events'
-import { GET_BOARD_BY_BOARD_ID, POST_BOARD_LIST_BY_ID } from '../api/axios-service'
+import { GET_BOARD_BY_BOARD_ID, POST_BOARD_LIST_BY_ID, POST_LIST_CARD_BY_ID } from '../api/axios-service'
 import { AxiosError } from 'axios'
 import handlerError from './errorHandler'
 
@@ -38,15 +38,34 @@ const boardController = (namespace: Namespace) => {
           boardId,
           token,
         })
-        console.log('result = ', result)
         namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.BOARD_CREATE_LIST_SUCCESS, {
           result,
         })
       } catch (e) {
-        console.log('create-board-error', e)
         handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.BOARD_CREATE_LIST_FAILED)
       }
     })
+
+    socket.on(SOCKET_EVENTS_ENUM.BOARD_CARD_CREATE, async (data: socketInterface.ICreateCardPayload) => {
+      try {
+        const { title, boardId, listId } = data
+        await POST_LIST_CARD_BY_ID({
+          title,
+          listId,
+          token,
+        })
+        const result = await GET_BOARD_BY_BOARD_ID({
+          boardId,
+          token,
+        })
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.BOARD_CARD_CREATE_SUCCESS, {
+          result,
+        })
+      } catch (e) {
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.BOARD_CARD_CREATE_FAILED)
+      }
+    })
+
     // 離線監聽
     socket.on('disconnect', () => {
       socket?.disconnect(true)
