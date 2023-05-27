@@ -38,4 +38,8 @@ export default {
   PATCH_BOARD_LIST_BY_ID: '/board/:board-id/list/:list-id',
   PATCH_BOARD_LIST_VISIBLE_BY_ID: '/board/:board-id/list/:list-id/visable',
   GET_BOARD_LIST_BY_ID: '/board/:board-id/list',
+  GET_BOARD_TAGS_BY_BOARD_ID: '/board/:board-id/tags',
+  POST_BOARD_TAGS_BY_BOARD_ID: '/board/:board-id/tags',
+  PUT_BOARD_TAGS_BY_BOARD_ID: '/board/:board-id/tags',
+  DELETE_BOARD_TAGS_BY_BOARD_ID: '/board/:board-id/tags',
 }
