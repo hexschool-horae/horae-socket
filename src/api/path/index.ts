@@ -26,7 +26,6 @@ export default {
   POST_BOARD_COVER_BY_ID: '/board/:board-id/cover',
   PUT_BOARD_COVER_BY_ID: '/board/:board-id/cover',
   DELETE_BOARD_COVER_BY_ID: '/board/:board-id/cover',
-  POST_LIST_CARD_BY_ID: '/list/:list-id/card',
   PUT_CARD_BY_ID: '/card/:card-id',
   PATCH_CARD_VISIBLE_BY_ID: '/card/:card-id/visible',
   GET_CARD_BY_ID: '/card/:card-id',
@@ -42,4 +41,5 @@ export default {
   POST_BOARD_TAGS_BY_BOARD_ID: '/board/:board-id/tags',
   PUT_BOARD_TAGS_BY_BOARD_ID: '/board/:board-id/tags',
   DELETE_BOARD_TAGS_BY_BOARD_ID: '/board/:board-id/tags',
+  POST_LIST_CARD_BY_LIST_ID: '/list/:list-id/card',
 }
