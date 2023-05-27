@@ -54,6 +54,10 @@ function post<T extends authRequest>(url: string, data: T): Promise<AxiosRespons
   return instance.post<T>(url, data).then((response: AxiosResponse) => Promise.resolve(response.data))
 }
 
+function put<T extends authRequest>(url: string, data: T): Promise<AxiosResponse> {
+  return instance.post<T>(url, data).then((response: AxiosResponse) => Promise.resolve(response.data))
+}
+
 function patch<T extends authRequest>(url: string, data: T): Promise<AxiosResponse> {
   return instance.patch<T>(url, data).then((response: AxiosResponse) => Promise.resolve(response.data))
 }
@@ -67,4 +71,5 @@ export default {
   post,
   delete: del,
   patch,
+  put,
 }
