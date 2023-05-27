@@ -33,3 +33,9 @@ export interface IDeleteBoardTagsRequest {
   boardId: string
   token: string
 }
+
+export interface IPostBoardCardByListIdRequest {
+  title: string
+  listId: string
+  token: string
+}
