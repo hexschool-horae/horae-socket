@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosResponse, AxiosError, InternalAxiosRequestConfig } from 'axios'
 
-const baseURL = 'https://horae-api.onrender.com/'
+const baseURL = 'https://horae-api-5x0d.onrender.com/'
 
 const instance: AxiosInstance = axios.create({
   baseURL,
