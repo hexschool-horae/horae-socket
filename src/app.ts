@@ -11,7 +11,7 @@ const expressServer = app.listen(8081, () => {
 })
 const io = new Server(expressServer, {
   cors: {
-    origin: 'http://localhost:3000',
+    origin: '*',
   },
 })
 boardController(io.of(BOARD))
