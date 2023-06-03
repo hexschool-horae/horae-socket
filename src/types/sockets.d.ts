@@ -12,3 +12,8 @@ export interface ICreateCardPayload {
   boardId: string
   listId: string
 }
+
+export interface IModifyBoardTitlePayload {
+  title: string
+  boardId: string
+}
