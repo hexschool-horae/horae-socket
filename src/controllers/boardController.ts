@@ -45,26 +45,7 @@ const boardController = (namespace: Namespace) => {
       }
     })
 
-    socket.on(SOCKET_EVENTS_ENUM.BOARD_CARD_CREATE, async (data: socketInterface.ICreateCardPayload) => {
-      try {
-        const { title, boardId, listId } = data
-        await apiService.POST_LIST_CARD_BY_LIST_ID({
-          title,
-          listId,
-          token,
-        })
-        const result = await apiService.GET_BOARD_BY_BOARD_ID({
-          boardId,
-          token,
-        })
-        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.BOARD_CARD_CREATE_RESULT, {
-          result,
-        })
-      } catch (e) {
-        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.BOARD_CARD_CREATE_RESULT)
-      }
-    })
-
+    // 監聽修改看板標題
     socket.on(SOCKET_EVENTS_ENUM.BOARD_MODIFY_TITLE, async (data: socketInterface.IModifyBoardTitlePayload) => {
       try {
         const { title, boardId } = data
@@ -82,6 +63,53 @@ const boardController = (namespace: Namespace) => {
       }
     })
 
+    // 監聽新增列表中卡片
+    socket.on(SOCKET_EVENTS_ENUM.BOARD_CARD_CREATE, async (data: socketInterface.ICreateCardPayload) => {
+      try {
+        const { title, boardId, listId } = data
+        await apiService.POST_LIST_CARD_BY_LIST_ID({
+          title,
+          listId,
+          token,
+        })
+        const result = await apiService.GET_BOARD_BY_BOARD_ID({
+          boardId,
+          token,
+        })
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.BOARD_CARD_CREATE_RESULT, {
+          code: 0,
+          result,
+        })
+      } catch (e) {
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.BOARD_CARD_CREATE_RESULT)
+      }
+    })
+
+    // 監聽修改單一卡片
+    socket.on(SOCKET_EVENTS_ENUM.BOARD_CARD_MODIFY, async (data: socketInterface.IModifySingleCard) => {
+      const { cardId, title, describe, startDate, endDate, proiority, boardId } = data
+      try {
+        await apiService.PATCH_CARD_BY_CARD_ID({
+          cardId,
+          title,
+          describe,
+          startDate,
+          endDate,
+          proiority,
+          token,
+        })
+        const result = await apiService.GET_CARD_BY_CARD_ID({
+          cardId,
+          token,
+        })
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.BOARD_CARD_MODIFY_RESULT, {
+          code: 0,
+          result,
+        })
+      } catch (e) {
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.BOARD_CARD_MODIFY_RESULT)
+      }
+    })
     // 新增看板標籤
     socket.on(SOCKET_EVENTS_ENUM.BOARD_CREATE_NEW_TAG, async (data: socketInterface.ICreateBoardNewTag) => {
       try {
