@@ -179,6 +179,48 @@ const boardController = (namespace: Namespace) => {
       }
     })
 
+    socket.on(SOCKET_EVENTS_ENUM.ATTACH_TAG_TO_CARD, async (data: socketInterface.IAttachTagToCard) => {
+      try {
+        const { tagId, cardId, boardId } = data
+        await apiService.POST_CARD_TAG_BY_CARD_ID({
+          tagId,
+          cardId,
+          token,
+        })
+        const result = await apiService.GET_CARD_BY_CARD_ID({
+          cardId,
+          token,
+        })
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.ATTACH_TAG_TO_CARD_RESULT, {
+          code: 0, // 成功
+          result,
+        })
+      } catch (e) {
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.ATTACH_TAG_TO_CARD_RESULT)
+      }
+    })
+
+    socket.on(SOCKET_EVENTS_ENUM.REMOVE_TAG_FROM_CARD, async (data: socketInterface.IDeleteTagFromCard) => {
+      try {
+        const { tagId, cardId, boardId } = data
+        await apiService.DELETE_CARD_TAG_BY_CARD_ID({
+          tagId,
+          cardId,
+          token,
+        })
+        const result = await apiService.GET_CARD_BY_CARD_ID({
+          cardId,
+          token,
+        })
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.REMOVE_TAG_FROM_CARD_RESULT, {
+          code: 0, // 成功
+          result,
+        })
+      } catch (e) {
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.REMOVE_TAG_FROM_CARD_RESULT)
+      }
+    })
+
     // 離線監聽
     socket.on('disconnect', () => {
       socket?.disconnect(true)

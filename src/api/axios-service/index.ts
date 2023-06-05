@@ -74,10 +74,10 @@ export const PATCH_CARD_BY_CARD_ID = (payload: interfaces.IPatchCardByCardIdRequ
 
 export const POST_CARD_TAG_BY_CARD_ID = (payload: interfaces.IPostCardTagByCardIdRequest) => {
   const url = apiPath.PATCH_CARD_BY_CARD_ID.replace(':card-id', payload.cardId)
-  return axios.patch(url, payload)
+  return axios.post<interfaces.IPostCardTagByCardIdResponse>(url, payload)
 }
 
 export const DELETE_CARD_TAG_BY_CARD_ID = (payload: interfaces.IDeleteCardTagByCardIdRequest) => {
   const url = apiPath.DELETE_CARD_TAG_BY_CARD_ID.replace(':card-id', payload.cardId)
-  return axios.patch(url, payload)
+  return axios.delete<interfaces.IDeleteCardTagByCardIdResponse>(url, payload)
 }
