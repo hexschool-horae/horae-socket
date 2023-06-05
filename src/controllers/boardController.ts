@@ -130,6 +130,28 @@ const boardController = (namespace: Namespace) => {
       }
     })
 
+    // 監聽封存看板列表事件
+    socket.on(SOCKET_EVENTS_ENUM.BOARD_ARCHIVE_LIST, async (data: socketInterface.IBoardArchiveList) => {
+      try {
+        const { status, listId, boardId } = data
+        await apiService.PATCH_LIST_STATUS_BY_LIST_ID({
+          status,
+          listId,
+          token,
+        })
+        const result = await apiService.GET_BOARD_BY_BOARD_ID({
+          boardId,
+          token,
+        })
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.BOARD_ARCHIVE_LIST_RESULT, {
+          code: 0,
+          result,
+        })
+      } catch (e) {
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.BOARD_ARCHIVE_LIST_RESULT)
+      }
+    })
+
     // 監聽新增列表中卡片
     socket.on(SOCKET_EVENTS_ENUM.BOARD_CARD_CREATE, async (data: socketInterface.ICreateCardPayload) => {
       try {

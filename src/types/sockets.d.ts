@@ -13,6 +13,12 @@ export interface IBoardModifyListTitle {
   boardId: string
 }
 
+export interface IBoardArchiveList {
+  status: 'open' | 'close'
+  listId: string
+  boardId: string
+}
+
 export interface ICreateCardPayload {
   title: string
   boardId: string

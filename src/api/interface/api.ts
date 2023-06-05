@@ -128,7 +128,6 @@ export interface IPatchBoardListTitleByListIdRequest extends IAuth {
 
 export interface IPatchBoardListStatusByListIdRequest extends IAuth {
   listId: string
-  boardId: string
   status: 'open' | 'close'
 }
 
