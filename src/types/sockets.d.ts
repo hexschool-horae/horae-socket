@@ -67,3 +67,11 @@ export interface IAddNewCardCommnet {
   cardId: string
   boardId: string
 }
+
+// 修改卡片評論
+export interface IModifyNewCardCommnet {
+  comment: string
+  commentId: string
+  cardId: string
+  boardId: string
+}

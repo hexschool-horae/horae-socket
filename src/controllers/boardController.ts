@@ -221,7 +221,8 @@ const boardController = (namespace: Namespace) => {
       }
     })
 
-    socket.on(SOCKET_EVENTS_ENUM.ADD_NEW_CARD_COMMNET, async (data: socketInterface.ICommn) => {
+    // 新增卡片評論
+    socket.on(SOCKET_EVENTS_ENUM.ADD_NEW_CARD_COMMNET, async (data: socketInterface.IAddNewCardCommnet) => {
       try {
         const { comment, cardId, boardId } = data
         await apiService.POST_CARD_COMMENT_BY_CARD_ID({
@@ -242,6 +243,28 @@ const boardController = (namespace: Namespace) => {
       }
     })
 
+    // 修改卡片評論
+    socket.on(SOCKET_EVENTS_ENUM.MODIFT_CARD_COMMENT, async (data: socketInterface.IModifyNewCardCommnet) => {
+      try {
+        const { comment, cardId, boardId, commentId } = data
+        await apiService.PUT_CARD_COMMENT_BY_CARD_ID({
+          comment,
+          commentId,
+          cardId,
+          token,
+        })
+        const result = await apiService.GET_CARD_BY_CARD_ID({
+          cardId,
+          token,
+        })
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.MODIFT_CARD_COMMENT_RESULT, {
+          code: 0, // 成功
+          result,
+        })
+      } catch (e) {
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.MODIFT_CARD_COMMENT_RESULT)
+      }
+    })
     // 離線監聽
     socket.on('disconnect', () => {
       socket?.disconnect(true)
