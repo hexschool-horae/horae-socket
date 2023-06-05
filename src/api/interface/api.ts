@@ -17,53 +17,8 @@ export interface IGetBoardByIdResponse extends IBasicResponse {
     discribe: string
     coverPath: string
     viewSet: string
-    members: [
-      {
-        userId: {
-          _id: string
-          name: string
-        }
-        role: string
-        _id: string
-      }
-    ]
-    lists: [
-      {
-        _id: string
-        title: string
-        status: string
-        position: number
-        cards: [
-          {
-            _id: string
-            title: string
-            startDate: Date
-            endDate: Date
-            tags: [
-              {
-                _id: string
-                title: string
-                color: string
-              }
-            ]
-            comments: [
-              {
-                _id: string
-                comment: string
-                user: {
-                  _id: string
-                  name: string
-                  createdAt: string
-                }
-                card: string
-              }
-            ]
-            proiority: string
-            position: number
-          }
-        ]
-      }
-    ]
+    members: Array<object>
+    lists: Array<object>
     yourRole: string
     yourPermission: string
   }
@@ -78,18 +33,8 @@ export interface IGetBoardTagsByBoardIdRequest extends IAuth {
   boardId: string
 }
 
-export interface IGetBoardTagsByBoardIdResponse {
-  success: string
-  message: string
-  data: [
-    {
-      _id: string
-      title: string
-      color: string
-      boardId: string
-      __v: number
-    }
-  ]
+export interface IGetBoardTagsByBoardIdResponse extends IBasicResponse {
+  data: Array<object>
 }
 
 export interface IPostBoardTagsRequest extends IAuth {
@@ -120,15 +65,39 @@ export interface IPostBoardCardByListIdRequest extends IAuth {
 }
 
 export interface IPostBoardCardByListIdResponse extends IBasicResponse {}
+export interface IGetBoardCardByCardIdRequest extends IAuth {
+  cardId: string
+}
+
+export interface IGetBoardCardByCardIdResponse extends IBasicResponse {
+  data: {
+    _id: string
+    title: string
+    describe: string
+    startDate: Date
+    endDate: Date
+    members: Array<object>
+    comments: Array<object>
+    tags: Array<object>
+    todolists: Array<object>
+    attachments: Array<object>
+    proiority: string
+    coverPath: string
+    position: number
+    updateUser: string
+    createdAt: string
+    updateAt: string
+    version: number
+  }
+}
 
 export interface IPatchCardByCardIdRequest extends IAuth {
-  boardId: string
   cardId: string
   title: string
   describe: string
   startDate: Date
   endDate: Date
-  proiority: number
+  proiority: string
 }
 
 export interface IModifyBoardViewPermissionRequest extends IAuth {

@@ -35,3 +35,13 @@ export interface IDeleteBoardTag {
   tagId: string
   boardId: string
 }
+
+// 修改單一卡片
+export interface IModifySingleCard {
+  cardId: string
+  title: string
+  describe: string
+  startDate: Date
+  endDate: Date
+  proiority: string
+}
