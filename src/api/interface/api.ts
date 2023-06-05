@@ -135,8 +135,12 @@ export interface IPostCardTagByCardIdRequest extends IAuth {
   boardId: string
 }
 
+export interface IPostCardTagByCardIdResponse extends IBasicResponse {}
+
 export interface IDeleteCardTagByCardIdRequest extends IAuth {
   tagId: string
   cardId: string
   boardId: string
 }
+
+export interface IDeleteCardTagByCardIdResponse extends IBasicResponse {}
