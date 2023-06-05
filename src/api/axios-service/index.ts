@@ -62,6 +62,11 @@ export const POST_LIST_CARD_BY_LIST_ID = (payload: interfaces.IPostBoardCardByLi
   return axios.post<interfaces.IPostBoardCardByListIdResponse>(url, payload)
 }
 
+export const GET_CARD_BY_CARD_ID = (payload: interfaces.IGetBoardCardByCardIdRequest) => {
+  const url = apiPath.GET_CARD_BY_CARD_ID.replace(':card-id', payload.cardId)
+  return axios.get<interfaces.IGetBoardCardByCardIdResponse>(url, payload)
+}
+
 export const PATCH_CARD_BY_CARD_ID = (payload: interfaces.IPatchCardByCardIdRequest) => {
   const url = apiPath.PATCH_CARD_BY_CARD_ID.replace(':card-id', payload.cardId)
   return axios.patch(url, payload)
