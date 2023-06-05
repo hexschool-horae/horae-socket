@@ -2,14 +2,14 @@ import axios from '../axios'
 import apiPath from '../path'
 import * as interfaces from '../interface/api'
 
-export const PATCH_BOARD_VIEW_SET = (payload: interfaces.IModifyBoardViewPermissionRequest) => {
+export const PATCH_BOARD_VIEW_SET_BY_BOARD_ID = (payload: interfaces.IModifyBoardViewPermissionRequest) => {
   const url = apiPath.PATCH_BOARD_VIEW_SET_BY_BOARD_ID.replace(':board-id', payload.boardId)
-  return axios.post(url, payload)
+  return axios.patch<interfaces.IModifyBoardViewPermissionResponse>(url, payload)
 }
 
 export const PATCH_BOARD_STATUS_BY_BOARD_ID = (payload: interfaces.IPatchBoardStatusByBoardIdRequest) => {
   const url = apiPath.PATCH_BOARD_STATUS_BY_BOARD_ID.replace(':board-id', payload.boardId)
-  return axios.patch(url, payload)
+  return axios.patch<interfaces.IPatchBoardStatusByBoardIdResponse>(url, payload)
 }
 
 export const PATCH_BOARD_TITLE_BY_BOARD_ID = (payload: interfaces.IPatchBoardTitleByBoardIdRequest) => {

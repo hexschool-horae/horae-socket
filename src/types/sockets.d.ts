@@ -7,10 +7,32 @@ export interface IBoardCreatePayload {
   boardId: string
 }
 
+export interface IBoardModifyListTitle {
+  title: string
+  listId: string
+  boardId: string
+}
+
+export interface IBoardArchiveList {
+  status: 'open' | 'close'
+  listId: string
+  boardId: string
+}
+
 export interface ICreateCardPayload {
   title: string
   boardId: string
   listId: string
+}
+
+export interface IModifyBoardViewSet {
+  viewSet: 'private' | 'public'
+  boardId: string
+}
+
+export interface IArchiveBoardStatus {
+  status: 'open' | 'close'
+  boardId: string
 }
 
 export interface IModifyBoardTitlePayload {

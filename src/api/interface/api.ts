@@ -105,10 +105,14 @@ export interface IModifyBoardViewPermissionRequest extends IAuth {
   viewSet: 'private' | 'public'
 }
 
+export interface IModifyBoardViewPermissionResponse extends IBasicResponse {}
+
 export interface IPatchBoardStatusByBoardIdRequest extends IAuth {
   boardId: string
   status: 'open' | 'close'
 }
+
+export interface IPatchBoardStatusByBoardIdResponse extends IBasicResponse {}
 
 export interface IPatchBoardTitleByBoardIdRequest extends IAuth {
   boardId: string
@@ -119,13 +123,11 @@ export interface IPatchBoardTitleByBoardIdResponse extends IBasicResponse {}
 
 export interface IPatchBoardListTitleByListIdRequest extends IAuth {
   listId: string
-  boardId: string
   title: string
 }
 
 export interface IPatchBoardListStatusByListIdRequest extends IAuth {
   listId: string
-  boardId: string
   status: 'open' | 'close'
 }
 

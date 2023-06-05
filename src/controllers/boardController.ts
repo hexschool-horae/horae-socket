@@ -24,27 +24,6 @@ const boardController = (namespace: Namespace) => {
       socket.leave(boardId)
     })
 
-    // 監聽建立看板
-    socket.on(SOCKET_EVENTS_ENUM.BOARD_CREATE_LIST, async (data: socketInterface.IBoardCreatePayload) => {
-      try {
-        const { title, boardId } = data
-        await apiService.POST_BOARD_LIST_BY_BOARD_ID({
-          title,
-          boardId,
-          token,
-        })
-        const result = await apiService.GET_BOARD_BY_BOARD_ID({
-          boardId,
-          token,
-        })
-        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.BOARD_CREATE_LIST_RESULT, {
-          result,
-        })
-      } catch (e) {
-        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.BOARD_CREATE_LIST_RESULT)
-      }
-    })
-
     // 監聽修改看板標題
     socket.on(SOCKET_EVENTS_ENUM.BOARD_MODIFY_TITLE, async (data: socketInterface.IModifyBoardTitlePayload) => {
       try {
@@ -60,6 +39,116 @@ const boardController = (namespace: Namespace) => {
         })
       } catch (e) {
         handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.BOARD_MODIFY_TITLE_RESULT)
+      }
+    })
+
+    // 修改看板觀看權限
+    socket.on(SOCKET_EVENTS_ENUM.BOARD_MODIFY_VIEW_SET, async (data: socketInterface.IModifyBoardViewSet) => {
+      try {
+        const { viewSet, boardId } = data
+        await apiService.PATCH_BOARD_VIEW_SET_BY_BOARD_ID({
+          viewSet,
+          boardId,
+          token,
+        })
+        const result = await apiService.GET_BOARD_BY_BOARD_ID({
+          boardId,
+          token,
+        })
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.BOARD_MODIFY_VIEW_SET_RESULT, {
+          code: 0, // 成功
+          result,
+        })
+      } catch (e) {
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.BOARD_MODIFY_VIEW_SET_RESULT)
+      }
+    })
+
+    // 看板封存設定 開啟/關閉
+    socket.on(SOCKET_EVENTS_ENUM.BOARD_ARCHIVE, async (data: socketInterface.IArchiveBoardStatus) => {
+      try {
+        const { status, boardId } = data
+        await apiService.PATCH_BOARD_STATUS_BY_BOARD_ID({
+          status,
+          boardId,
+          token,
+        })
+        const result = await apiService.GET_BOARD_BY_BOARD_ID({
+          boardId,
+          token,
+        })
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.BOARD_ARCHIVE_RESULT, {
+          code: 0, // 成功
+          result,
+        })
+      } catch (e) {
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.BOARD_ARCHIVE_RESULT)
+      }
+    })
+
+    // 監聽建立看板列表
+    socket.on(SOCKET_EVENTS_ENUM.BOARD_CREATE_LIST, async (data: socketInterface.IBoardCreatePayload) => {
+      try {
+        const { title, boardId } = data
+        await apiService.POST_BOARD_LIST_BY_BOARD_ID({
+          title,
+          boardId,
+          token,
+        })
+        const result = await apiService.GET_BOARD_BY_BOARD_ID({
+          boardId,
+          token,
+        })
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.BOARD_CREATE_LIST_RESULT, {
+          code: 0,
+          result,
+        })
+      } catch (e) {
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.BOARD_CREATE_LIST_RESULT)
+      }
+    })
+
+    // 監聽建立看板列表標題
+    socket.on(SOCKET_EVENTS_ENUM.BOARD_MODIFY_LIST_TITLE, async (data: socketInterface.IBoardModifyListTitle) => {
+      try {
+        const { title, listId, boardId } = data
+        await apiService.PATCH_LIST_TITLE_BY_LIST_ID({
+          title,
+          listId,
+          token,
+        })
+        const result = await apiService.GET_BOARD_BY_BOARD_ID({
+          boardId,
+          token,
+        })
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.BOARD_MODIFY_LIST_TITLE_RESULT, {
+          code: 0,
+          result,
+        })
+      } catch (e) {
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.BOARD_MODIFY_LIST_TITLE_RESULT)
+      }
+    })
+
+    // 監聽封存看板列表事件
+    socket.on(SOCKET_EVENTS_ENUM.BOARD_ARCHIVE_LIST, async (data: socketInterface.IBoardArchiveList) => {
+      try {
+        const { status, listId, boardId } = data
+        await apiService.PATCH_LIST_STATUS_BY_LIST_ID({
+          status,
+          listId,
+          token,
+        })
+        const result = await apiService.GET_BOARD_BY_BOARD_ID({
+          boardId,
+          token,
+        })
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.BOARD_ARCHIVE_LIST_RESULT, {
+          code: 0,
+          result,
+        })
+      } catch (e) {
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.BOARD_ARCHIVE_LIST_RESULT)
       }
     })
 
