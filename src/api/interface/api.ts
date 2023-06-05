@@ -10,6 +10,65 @@ export interface IGetBoardByIdRequest extends IAuth {
   boardId: string
 }
 
+export interface IGetBoardByIdResponse extends IBasicResponse {
+  data: {
+    _id: string
+    title: string
+    discribe: string
+    coverPath: string
+    viewSet: string
+    members: [
+      {
+        userId: {
+          _id: string
+          name: string
+        }
+        role: string
+        _id: string
+      }
+    ]
+    lists: [
+      {
+        _id: string
+        title: string
+        status: string
+        position: number
+        cards: [
+          {
+            _id: string
+            title: string
+            startDate: Date
+            endDate: Date
+            tags: [
+              {
+                _id: string
+                title: string
+                color: string
+              }
+            ]
+            comments: [
+              {
+                _id: string
+                comment: string
+                user: {
+                  _id: string
+                  name: string
+                  createdAt: string
+                }
+                card: string
+              }
+            ]
+            proiority: string
+            position: number
+          }
+        ]
+      }
+    ]
+    yourRole: string
+    yourPermission: string
+  }
+}
+
 export interface IPostBoardListRequest extends IAuth {
   title: string
   boardId: string
@@ -59,6 +118,8 @@ export interface IPostBoardCardByListIdRequest extends IAuth {
   title: string
   listId: string
 }
+
+export interface IPostBoardCardByListIdResponse extends IBasicResponse {}
 
 export interface IPatchCardByCardIdRequest extends IAuth {
   boardId: string

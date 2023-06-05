@@ -19,7 +19,7 @@ export const PATCH_BOARD_TITLE_BY_BOARD_ID = (payload: interfaces.IPatchBoardTit
 
 export const GET_BOARD_BY_BOARD_ID = (payload: interfaces.IGetBoardByIdRequest) => {
   const url = apiPath.GET_BOARD_BY_BOARD_ID.replace(':board-id', payload.boardId)
-  return axios.get<interfaces.IPatchBoardTitleByBoardIdResponse>(url, payload)
+  return axios.get<interfaces.IGetBoardByIdResponse>(url, payload)
 }
 
 export const POST_BOARD_LIST_BY_BOARD_ID = (payload: interfaces.IPostBoardListRequest) => {
@@ -59,7 +59,7 @@ export const GET_BOARD_TAGS_BY_BOARD_ID = (payload: interfaces.IGetBoardTagsByBo
 
 export const POST_LIST_CARD_BY_LIST_ID = (payload: interfaces.IPostBoardCardByListIdRequest) => {
   const url = apiPath.POST_LIST_CARD_BY_LIST_ID.replace(':list-id', payload.listId)
-  return axios.post(url, payload)
+  return axios.post<interfaces.IPostBoardCardByListIdResponse>(url, payload)
 }
 
 export const PATCH_CARD_BY_CARD_ID = (payload: interfaces.IPatchCardByCardIdRequest) => {
