@@ -265,6 +265,28 @@ const boardController = (namespace: Namespace) => {
         handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.MODIFT_CARD_COMMENT_RESULT)
       }
     })
+
+    // 刪除卡片評論
+    socket.on(SOCKET_EVENTS_ENUM.DELETE_CARD_COMMNET, async (data: socketInterface.IDeleteCardCommnet) => {
+      try {
+        const { cardId, boardId, commentId } = data
+        await apiService.DELETE_CARD_COMMENT_BY_CARD_ID({
+          commentId,
+          cardId,
+          token,
+        })
+        const result = await apiService.GET_CARD_BY_CARD_ID({
+          cardId,
+          token,
+        })
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.DELETE_CARD_COMMNET_RESULT, {
+          code: 0, // 成功
+          result,
+        })
+      } catch (e) {
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.DELETE_CARD_COMMNET_RESULT)
+      }
+    })
     // 離線監聽
     socket.on('disconnect', () => {
       socket?.disconnect(true)

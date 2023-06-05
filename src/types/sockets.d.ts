@@ -75,3 +75,10 @@ export interface IModifyNewCardCommnet {
   cardId: string
   boardId: string
 }
+
+// 刪除卡片評論
+export interface IDeleteCardCommnet {
+  commentId: string
+  cardId: string
+  boardId: string
+}
