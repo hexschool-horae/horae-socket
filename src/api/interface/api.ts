@@ -132,7 +132,6 @@ export interface IPatchBoardListStatusByListIdRequest extends IAuth {
 export interface IPostCardTagByCardIdRequest extends IAuth {
   tagId: string
   cardId: string
-  boardId: string
 }
 
 export interface IPostCardTagByCardIdResponse extends IBasicResponse {}
@@ -140,7 +139,6 @@ export interface IPostCardTagByCardIdResponse extends IBasicResponse {}
 export interface IDeleteCardTagByCardIdRequest extends IAuth {
   tagId: string
   cardId: string
-  boardId: string
 }
 
 export interface IDeleteCardTagByCardIdResponse extends IBasicResponse {}

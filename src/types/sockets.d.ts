@@ -46,3 +46,17 @@ export interface IModifySingleCard {
   endDate: Date
   proiority: string
 }
+
+// 在卡片新增標籤
+export interface IAttachTagToCard {
+  boardId: string
+  cardId: string
+  tagId: string
+}
+
+// 刪除卡片上的標籤
+export interface IDeleteTagFromCard {
+  boardId: string
+  cardId: string
+  tagId: string
+}
