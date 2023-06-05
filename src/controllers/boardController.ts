@@ -1,7 +1,6 @@
 import { Namespace } from 'socket.io'
 import socketInterface from '../types/sockets'
 import { SOCKET_EVENTS_ENUM } from '../types/sockets.events'
-import { GET_BOARD_BY_BOARD_ID, POST_BOARD_LIST_BY_BOARD_ID, POST_LIST_CARD_BY_LIST_ID } from '../api/axios-service'
 import * as apiService from '../api/axios-service/index'
 import { AxiosError } from 'axios'
 import handlerError from './errorHandler'
@@ -29,12 +28,12 @@ const boardController = (namespace: Namespace) => {
     socket.on(SOCKET_EVENTS_ENUM.BOARD_CREATE_LIST, async (data: socketInterface.IBoardCreatePayload) => {
       try {
         const { title, boardId } = data
-        await POST_BOARD_LIST_BY_BOARD_ID({
+        await apiService.POST_BOARD_LIST_BY_BOARD_ID({
           title,
           boardId,
           token,
         })
-        const result = await GET_BOARD_BY_BOARD_ID({
+        const result = await apiService.GET_BOARD_BY_BOARD_ID({
           boardId,
           token,
         })
@@ -49,12 +48,12 @@ const boardController = (namespace: Namespace) => {
     socket.on(SOCKET_EVENTS_ENUM.BOARD_CARD_CREATE, async (data: socketInterface.ICreateCardPayload) => {
       try {
         const { title, boardId, listId } = data
-        await POST_LIST_CARD_BY_LIST_ID({
+        await apiService.POST_LIST_CARD_BY_LIST_ID({
           title,
           listId,
           token,
         })
-        const result = await GET_BOARD_BY_BOARD_ID({
+        const result = await apiService.GET_BOARD_BY_BOARD_ID({
           boardId,
           token,
         })
@@ -75,11 +74,80 @@ const boardController = (namespace: Namespace) => {
           token,
         })
         namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.BOARD_MODIFY_TITLE_RESULT, {
-          code: 0,
-          title,
+          code: 0, // 成功
+          title, //
         })
       } catch (e) {
         handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.BOARD_MODIFY_TITLE_RESULT)
+      }
+    })
+
+    // 新增看板標籤
+    socket.on(SOCKET_EVENTS_ENUM.BOARD_CREATE_NEW_TAG, async (data: socketInterface.ICreateNewTag) => {
+      try {
+        const { title, color, boardId } = data
+        await apiService.POST_BOARD_TAGS_BY_BOARD_ID({
+          title,
+          color,
+          boardId,
+          token,
+        })
+        const result = await apiService.GET_BOARD_TAGS_BY_BOARD_ID({
+          boardId,
+          token,
+        })
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.BOARD_CREATE_NEW_TAG_RESULT, {
+          code: 0, // 成功
+          result,
+        })
+      } catch (e) {
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.BOARD_CREATE_NEW_TAG_RESULT)
+      }
+    })
+
+    // 修改看板標籤
+    socket.on(SOCKET_EVENTS_ENUM.BOARD_MODIFY_TAG, async (data: socketInterface.IModifyBoardTag) => {
+      try {
+        const { title, color, tagId, boardId } = data
+        await apiService.PUT_BOARD_TAGS_BY_BOARD_ID({
+          title,
+          tagId,
+          color,
+          boardId,
+          token,
+        })
+        const result = await apiService.GET_BOARD_TAGS_BY_BOARD_ID({
+          boardId,
+          token,
+        })
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.BOARD_MODIFY_TAG_RESULT, {
+          code: 0, // 成功
+          result,
+        })
+      } catch (e) {
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.BOARD_MODIFY_TAG_RESULT)
+      }
+    })
+
+    // 刪除看板標籤
+    socket.on(SOCKET_EVENTS_ENUM.BOARD_DELETE_TAG, async (data: socketInterface.IDeleteBoardTag) => {
+      try {
+        const { tagId, boardId } = data
+        await apiService.DELETE_BOARD_TAGS_BY_BOARD_ID({
+          tagId,
+          boardId,
+          token,
+        })
+        const result = await apiService.GET_BOARD_TAGS_BY_BOARD_ID({
+          boardId,
+          token,
+        })
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.BOARD_DELETE_TAG_RESULT, {
+          code: 0, // 成功
+          result,
+        })
+      } catch (e) {
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.BOARD_DELETE_TAG_RESULT)
       }
     })
 

@@ -19,7 +19,7 @@ export const PATCH_BOARD_TITLE_BY_BOARD_ID = (payload: interfaces.IPatchBoardTit
 
 export const GET_BOARD_BY_BOARD_ID = (payload: interfaces.IGetBoardByIdRequest) => {
   const url = apiPath.GET_BOARD_BY_BOARD_ID.replace(':board-id', payload.boardId)
-  return axios.get(url, payload)
+  return axios.get<interfaces.IPatchBoardTitleByBoardIdResponse>(url, payload)
 }
 
 export const POST_BOARD_LIST_BY_BOARD_ID = (payload: interfaces.IPostBoardListRequest) => {
@@ -44,17 +44,17 @@ export const POST_BOARD_TAGS_BY_BOARD_ID = (payload: interfaces.IPostBoardTagsRe
 
 export const PUT_BOARD_TAGS_BY_BOARD_ID = (payload: interfaces.IPutBoardTagsRequest) => {
   const url = apiPath.PUT_BOARD_TAGS_BY_BOARD_ID.replace(':board-id', payload.boardId)
-  return axios.put(url, payload)
+  return axios.put<interfaces.IPutBoardTagsResponse>(url, payload)
 }
 
 export const DELETE_BOARD_TAGS_BY_BOARD_ID = (payload: interfaces.IDeleteBoardTagsRequest) => {
   const url = apiPath.DELETE_BOARD_TAGS_BY_BOARD_ID.replace(':board-id', payload.boardId)
-  return axios.delete(url, payload)
+  return axios.delete<interfaces.IDeleteBoardTagsResponse>(url, payload)
 }
 
 export const GET_BOARD_TAGS_BY_BOARD_ID = (payload: interfaces.IGetBoardTagsByBoardIdRequest) => {
   const url = apiPath.GET_BOARD_TAGS_BY_BOARD_ID.replace(':board-id', payload.boardId)
-  return axios.get<interfaces.IGetBoardTagsByBoardIdRequest>(url, payload)
+  return axios.get<interfaces.IGetBoardTagsByBoardIdResponse>(url, payload)
 }
 
 export const POST_LIST_CARD_BY_LIST_ID = (payload: interfaces.IPostBoardCardByListIdRequest) => {

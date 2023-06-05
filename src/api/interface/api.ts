@@ -1,47 +1,66 @@
-export interface IGetBoardByIdRequest {
-  boardId: string
+interface IAuth {
   token: string
 }
-export interface IPostBoardListRequest {
+export interface IBasicResponse {
+  success?: string
+  message?: string
+}
+
+export interface IGetBoardByIdRequest extends IAuth {
+  boardId: string
+}
+
+export interface IPostBoardListRequest extends IAuth {
   title: string
   boardId: string
-  token: string
 }
 
-export interface IGetBoardTagsByBoardIdRequest {
+export interface IGetBoardTagsByBoardIdRequest extends IAuth {
   boardId: string
-  token: string
 }
 
-export interface IPostBoardTagsRequest {
+export interface IGetBoardTagsByBoardIdResponse {
+  success: string
+  message: string
+  data: [
+    {
+      _id: string
+      title: string
+      color: string
+      boardId: string
+      __v: number
+    }
+  ]
+}
+
+export interface IPostBoardTagsRequest extends IAuth {
   title: string
   color: string
   boardId: string
-  token: string
 }
 
-export interface IPutBoardTagsRequest {
+export interface IPutBoardTagsRequest extends IAuth {
   tagId: string
   title: string
   color: string
   boardId: string
-  token: string
 }
 
-export interface IDeleteBoardTagsRequest {
+export interface IPutBoardTagsResponse extends IBasicResponse {}
+
+export interface IDeleteBoardTagsRequest extends IAuth {
   tagId: string
   boardId: string
-  token: string
 }
 
-export interface IPostBoardCardByListIdRequest {
+export interface IDeleteBoardTagsResponse extends IBasicResponse {}
+
+export interface IPostBoardCardByListIdRequest extends IAuth {
   title: string
   listId: string
-  token: string
 }
 
-export interface IPatchCardByCardIdRequest {
-  token: string
+export interface IPatchCardByCardIdRequest extends IAuth {
   boardId: string
   cardId: string
   title: string
@@ -51,53 +70,43 @@ export interface IPatchCardByCardIdRequest {
   proiority: number
 }
 
-export interface IBasicResponse {
-  success?: string
-  message?: string
-}
-
-export interface IModifyBoardViewPermissionRequest {
+export interface IModifyBoardViewPermissionRequest extends IAuth {
   boardId: string
   viewSet: 'private' | 'public'
-  token: string
 }
 
-export interface IPatchBoardStatusByBoardIdRequest {
+export interface IPatchBoardStatusByBoardIdRequest extends IAuth {
   boardId: string
   status: 'open' | 'close'
-  token: string
 }
 
-export interface IPatchBoardTitleByBoardIdRequest {
+export interface IPatchBoardTitleByBoardIdRequest extends IAuth {
   boardId: string
   title: string
-  token: string
 }
 
-export interface IPatchBoardListTitleByListIdRequest {
+export interface IPatchBoardTitleByBoardIdResponse extends IBasicResponse {}
+
+export interface IPatchBoardListTitleByListIdRequest extends IAuth {
   listId: string
   boardId: string
   title: string
-  token: string
 }
 
-export interface IPatchBoardListStatusByListIdRequest {
+export interface IPatchBoardListStatusByListIdRequest extends IAuth {
   listId: string
   boardId: string
   status: 'open' | 'close'
-  token: string
 }
 
-export interface IPostCardTagByCardIdRequest {
+export interface IPostCardTagByCardIdRequest extends IAuth {
   tagId: string
   cardId: string
   boardId: string
-  token: string
 }
 
-export interface IDeleteCardTagByCardIdRequest {
+export interface IDeleteCardTagByCardIdRequest extends IAuth {
   tagId: string
   cardId: string
   boardId: string
-  token: string
 }
