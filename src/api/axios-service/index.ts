@@ -81,3 +81,18 @@ export const DELETE_CARD_TAG_BY_CARD_ID = (payload: interfaces.IDeleteCardTagByC
   const url = apiPath.DELETE_CARD_TAG_BY_CARD_ID.replace(':card-id', payload.cardId)
   return axios.delete<interfaces.IDeleteCardTagByCardIdResponse>(url, payload)
 }
+
+export const POST_CARD_COMMENT_BY_CARD_ID = (payload: interfaces.IPostCardCommentByCardIdRequest) => {
+  const url = apiPath.POST_CARD_COMMENT_BY_CARD_ID.replace(':card-id', payload.cardId)
+  return axios.post<interfaces.IPostCardCommentByCardIdResponse>(url, payload)
+}
+
+export const PUT_CARD_COMMENT_BY_CARD_ID = (payload: interfaces.IPutCardCommentByCardIdRequest) => {
+  const url = apiPath.PUT_CARD_COMMENT_BY_CARD_ID.replace(':card-id', payload.cardId)
+  return axios.put<interfaces.IPutCardCommentByCardIdResponse>(url, payload)
+}
+
+export const DELETE_CARD_COMMENT_BY_CARD_ID = (payload: interfaces.IDeleteCardCommentByCardIdRequest) => {
+  const url = apiPath.DELETE_CARD_COMMENT_BY_CARD_ID.replace(':card-id', payload.cardId)
+  return axios.put<interfaces.IDeleteCardCommentByCardIdResponse>(url, payload)
+}

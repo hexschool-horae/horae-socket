@@ -142,3 +142,25 @@ export interface IDeleteCardTagByCardIdRequest extends IAuth {
 }
 
 export interface IDeleteCardTagByCardIdResponse extends IBasicResponse {}
+
+export interface IPostCardCommentByCardIdRequest extends IAuth {
+  comment: string
+  cardId: string
+}
+
+export interface IPostCardCommentByCardIdResponse extends IBasicResponse {}
+
+export interface IPutCardCommentByCardIdRequest extends IAuth {
+  comment: string
+  commentId: string
+  cardId: string
+}
+
+export interface IPutCardCommentByCardIdResponse extends IBasicResponse {}
+
+export interface IDeleteCardCommentByCardIdRequest extends IAuth {
+  commentId: string
+  cardId: string
+}
+
+export interface IDeleteCardCommentByCardIdResponse extends IBasicResponse {}
