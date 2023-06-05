@@ -46,7 +46,7 @@ export default {
   DELETE_BOARD_TAGS_BY_BOARD_ID: '/board/:board-id/tags',
   GET_BOARD_TAGS_BY_BOARD_ID: '/board/:board-id/tags',
   POST_LIST_CARD_BY_LIST_ID: '/list/:list-id/card',
-  GET_CARD_BY_ID: '/card/:card-id',
+  GET_CARD_BY_CARD_ID: '/card/:card-id',
   PATCH_CARD_BY_CARD_ID: '/card/:card-id',
   POST_CARD_TAG_BY_CARD_ID: '/card/:card-id/tag',
   DELETE_CARD_TAG_BY_CARD_ID: '/card/:card-id/tag',
