@@ -62,14 +62,14 @@ export interface IDeleteTagFromCard {
 }
 
 // 新增卡片評論
-export interface IAddNewCardCommnet {
+export interface IAddCardComment {
   comment: string
   cardId: string
   boardId: string
 }
 
 // 修改卡片評論
-export interface IModifyNewCardCommnet {
+export interface IModifyCardComment {
   comment: string
   commentId: string
   cardId: string
@@ -77,7 +77,7 @@ export interface IModifyNewCardCommnet {
 }
 
 // 刪除卡片評論
-export interface IDeleteCardCommnet {
+export interface IDeleteCardComment {
   commentId: string
   cardId: string
   boardId: string

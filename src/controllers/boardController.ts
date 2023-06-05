@@ -222,7 +222,7 @@ const boardController = (namespace: Namespace) => {
     })
 
     // 新增卡片評論
-    socket.on(SOCKET_EVENTS_ENUM.ADD_NEW_CARD_COMMNET, async (data: socketInterface.IAddNewCardCommnet) => {
+    socket.on(SOCKET_EVENTS_ENUM.ADD_NEW_CARD_COMMENT, async (data: socketInterface.IAddCardComment) => {
       try {
         const { comment, cardId, boardId } = data
         await apiService.POST_CARD_COMMENT_BY_CARD_ID({
@@ -234,17 +234,17 @@ const boardController = (namespace: Namespace) => {
           cardId,
           token,
         })
-        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.ADD_NEW_CARD_COMMNET_RESULT, {
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.ADD_NEW_CARD_COMMENT_RESULT, {
           code: 0, // 成功
           result,
         })
       } catch (e) {
-        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.ADD_NEW_CARD_COMMNET_RESULT)
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.ADD_NEW_CARD_COMMENT_RESULT)
       }
     })
 
     // 修改卡片評論
-    socket.on(SOCKET_EVENTS_ENUM.MODIFT_CARD_COMMENT, async (data: socketInterface.IModifyNewCardCommnet) => {
+    socket.on(SOCKET_EVENTS_ENUM.MODIFT_CARD_COMMENT, async (data: socketInterface.IModifyCardComment) => {
       try {
         const { comment, cardId, boardId, commentId } = data
         await apiService.PUT_CARD_COMMENT_BY_CARD_ID({
@@ -267,7 +267,7 @@ const boardController = (namespace: Namespace) => {
     })
 
     // 刪除卡片評論
-    socket.on(SOCKET_EVENTS_ENUM.DELETE_CARD_COMMNET, async (data: socketInterface.IDeleteCardCommnet) => {
+    socket.on(SOCKET_EVENTS_ENUM.DELETE_CARD_COMMENT, async (data: socketInterface.IDeleteCardComment) => {
       try {
         const { cardId, boardId, commentId } = data
         await apiService.DELETE_CARD_COMMENT_BY_CARD_ID({
@@ -279,12 +279,12 @@ const boardController = (namespace: Namespace) => {
           cardId,
           token,
         })
-        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.DELETE_CARD_COMMNET_RESULT, {
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.DELETE_CARD_COMMENT_RESULT, {
           code: 0, // 成功
           result,
         })
       } catch (e) {
-        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.DELETE_CARD_COMMNET_RESULT)
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.DELETE_CARD_COMMENT_RESULT)
       }
     })
     // 離線監聽
