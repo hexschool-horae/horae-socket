@@ -13,6 +13,11 @@ export interface ICreateCardPayload {
   listId: string
 }
 
+export interface IModifyBoardViewSet {
+  viewSet: 'private' | 'public'
+  boardId: string
+}
+
 export interface IModifyBoardTitlePayload {
   title: string
   boardId: string

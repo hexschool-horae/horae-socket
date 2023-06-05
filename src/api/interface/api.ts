@@ -105,6 +105,8 @@ export interface IModifyBoardViewPermissionRequest extends IAuth {
   viewSet: 'private' | 'public'
 }
 
+export interface IModifyBoardViewPermissionResponse extends IBasicResponse {}
+
 export interface IPatchBoardStatusByBoardIdRequest extends IAuth {
   boardId: string
   status: 'open' | 'close'

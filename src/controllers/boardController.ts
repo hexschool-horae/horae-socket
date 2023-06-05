@@ -63,6 +63,27 @@ const boardController = (namespace: Namespace) => {
       }
     })
 
+    socket.on(SOCKET_EVENTS_ENUM.BOARD_MODIFY_VIEW_SET, async (data: socketInterface.IModifyBoardViewSet) => {
+      try {
+        const { viewSet, boardId } = data
+        await apiService.PATCH_BOARD_VIEW_SET_BY_BOARD_ID({
+          viewSet,
+          boardId,
+          token,
+        })
+        const result = await apiService.GET_BOARD_BY_BOARD_ID({
+          boardId,
+          token,
+        })
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.BOARD_MODIFY_VIEW_SET_RESULT, {
+          code: 0, // 成功
+          result,
+        })
+      } catch (e) {
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.BOARD_MODIFY_TITLE_RESULT)
+      }
+    })
+
     // 監聽新增列表中卡片
     socket.on(SOCKET_EVENTS_ENUM.BOARD_CARD_CREATE, async (data: socketInterface.ICreateCardPayload) => {
       try {
