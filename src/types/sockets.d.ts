@@ -60,3 +60,10 @@ export interface IDeleteTagFromCard {
   cardId: string
   tagId: string
 }
+
+// 新增卡片評論
+export interface IAddNewCardCommnet {
+  comment: string
+  cardId: string
+  boardId: string
+}

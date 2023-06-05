@@ -221,6 +221,27 @@ const boardController = (namespace: Namespace) => {
       }
     })
 
+    socket.on(SOCKET_EVENTS_ENUM.ADD_NEW_CARD_COMMNET, async (data: socketInterface.ICommn) => {
+      try {
+        const { comment, cardId, boardId } = data
+        await apiService.POST_CARD_COMMENT_BY_CARD_ID({
+          comment,
+          cardId,
+          token,
+        })
+        const result = await apiService.GET_CARD_BY_CARD_ID({
+          cardId,
+          token,
+        })
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.ADD_NEW_CARD_COMMNET_RESULT, {
+          code: 0, // 成功
+          result,
+        })
+      } catch (e) {
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.ADD_NEW_CARD_COMMNET_RESULT)
+      }
+    })
+
     // 離線監聽
     socket.on('disconnect', () => {
       socket?.disconnect(true)
