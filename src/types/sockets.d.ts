@@ -7,6 +7,12 @@ export interface IBoardCreatePayload {
   boardId: string
 }
 
+export interface IBoardModifyListTitle {
+  title: string
+  listId: string
+  boardId: string
+}
+
 export interface ICreateCardPayload {
   title: string
   boardId: string

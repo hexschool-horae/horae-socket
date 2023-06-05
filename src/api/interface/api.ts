@@ -123,7 +123,6 @@ export interface IPatchBoardTitleByBoardIdResponse extends IBasicResponse {}
 
 export interface IPatchBoardListTitleByListIdRequest extends IAuth {
   listId: string
-  boardId: string
   title: string
 }
 
