@@ -83,7 +83,7 @@ const boardController = (namespace: Namespace) => {
     })
 
     // 新增看板標籤
-    socket.on(SOCKET_EVENTS_ENUM.BOARD_CREATE_NEW_TAG, async (data: socketInterface.ICreateNewTag) => {
+    socket.on(SOCKET_EVENTS_ENUM.BOARD_CREATE_NEW_TAG, async (data: socketInterface.ICreateBoardNewTag) => {
       try {
         const { title, color, boardId } = data
         await apiService.POST_BOARD_TAGS_BY_BOARD_ID({
