@@ -63,6 +63,7 @@ const boardController = (namespace: Namespace) => {
       }
     })
 
+    // 修改看板觀看權限
     socket.on(SOCKET_EVENTS_ENUM.BOARD_MODIFY_VIEW_SET, async (data: socketInterface.IModifyBoardViewSet) => {
       try {
         const { viewSet, boardId } = data
@@ -80,7 +81,29 @@ const boardController = (namespace: Namespace) => {
           result,
         })
       } catch (e) {
-        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.BOARD_MODIFY_TITLE_RESULT)
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.BOARD_MODIFY_VIEW_SET_RESULT)
+      }
+    })
+
+    // 看板封存設定 開啟/關閉
+    socket.on(SOCKET_EVENTS_ENUM.BOARD_ARCHIVE, async (data: socketInterface.IArchiveBoardStatus) => {
+      try {
+        const { status, boardId } = data
+        await apiService.PATCH_BOARD_STATUS_BY_BOARD_ID({
+          status,
+          boardId,
+          token,
+        })
+        const result = await apiService.GET_BOARD_BY_BOARD_ID({
+          boardId,
+          token,
+        })
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.BOARD_ARCHIVE_RESULT, {
+          code: 0, // 成功
+          result,
+        })
+      } catch (e) {
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.BOARD_ARCHIVE_RESULT)
       }
     })
 

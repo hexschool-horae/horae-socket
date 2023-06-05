@@ -18,6 +18,11 @@ export interface IModifyBoardViewSet {
   boardId: string
 }
 
+export interface IArchiveBoardStatus {
+  status: 'open' | 'close'
+  boardId: string
+}
+
 export interface IModifyBoardTitlePayload {
   title: string
   boardId: string

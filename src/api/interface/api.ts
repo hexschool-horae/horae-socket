@@ -112,6 +112,8 @@ export interface IPatchBoardStatusByBoardIdRequest extends IAuth {
   status: 'open' | 'close'
 }
 
+export interface IPatchBoardStatusByBoardIdResponse extends IBasicResponse {}
+
 export interface IPatchBoardTitleByBoardIdRequest extends IAuth {
   boardId: string
   title: string
