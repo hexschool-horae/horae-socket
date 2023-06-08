@@ -53,4 +53,10 @@ export default {
   POST_CARD_COMMENT_BY_CARD_ID: '/card/:card-id/tag',
   PUT_CARD_COMMENT_BY_CARD_ID: '/card/:card-id/tag',
   DELETE_CARD_COMMENT_BY_CARD_ID: '/card/:card-id/tag',
+  POST_CARD_TODO_LIST_BY_CARD_ID: '/card/:card-id/todolist',
+  PUT_CARD_TODO_LIST_BY_CARD_ID: '/card/:card-id/todolist',
+  DELETE_CARD_TODO_LIST_BY_CARD_ID: '/card/:card-id/todolist',
+  POST_CARD_TODO_LIST_CONTENT_BY_CARD_ID: '/card/:card-id/todolist-content',
+  PUT_CARD_TODO_LIST_CONTENT_BY_CARD_ID: '/card/:card-id/todolist-content',
+  DELETE_CARD_TODO_LIST_CONTENT_BY_CARD_ID: '/card/:card-id/todolist-content',
 }
