@@ -166,3 +166,49 @@ export interface IDeleteCardCommentByCardIdRequest extends IAuth {
 }
 
 export interface IDeleteCardCommentByCardIdResponse extends IBasicResponse {}
+
+export interface IPostCardTodoListByCardIdRequest extends IAuth {
+  title: string
+  cardId: string
+}
+
+export interface IPostCardTodoListByCardIdResponse extends IBasicResponse {}
+
+export interface IPutCardTodoListByCardIdRequest extends IAuth {
+  title: string
+  titleId: string
+  cardId: string
+}
+
+export interface IPutCardTodoListByCardIdResponse extends IBasicResponse {}
+
+export interface IDeleteCardTodoListByCardIdRequest extends IAuth {
+  titleId: string
+  cardId: string
+}
+
+export interface IDeleteCardTodoListByCardIdResponse extends IBasicResponse {}
+
+export interface IPostCardTodoListContentByCardIdRequest extends IAuth {
+  titleId: string
+  cardId: string
+  content: string
+}
+
+export interface IPostCardTodoListContentByCardIdResponse extends IBasicResponse {}
+
+export interface IPutCardTodoListContentByCardIdRequest extends IAuth {
+  cardId: string
+  contentId: string
+  content: string
+  completed: boolean
+}
+
+export interface IPutCardTodoListContentByCardIdResponse extends IBasicResponse {}
+
+export interface IDeleteCardTodoListContentByCardIdRequest extends IAuth {
+  cardId: string
+  contentId: string
+}
+
+export interface IDeleteCardTodoListContentByCardIdResponse extends IBasicResponse {}
