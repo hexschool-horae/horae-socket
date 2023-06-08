@@ -96,3 +96,35 @@ export const DELETE_CARD_COMMENT_BY_CARD_ID = (payload: interfaces.IDeleteCardCo
   const url = apiPath.DELETE_CARD_COMMENT_BY_CARD_ID.replace(':card-id', payload.cardId)
   return axios.put<interfaces.IDeleteCardCommentByCardIdResponse>(url, payload)
 }
+
+export const POST_CARD_TODO_LIST_BY_CARD_ID = (payload: interfaces.IPostCardTodoListByCardIdRequest) => {
+  const url = apiPath.POST_CARD_TODO_LIST_BY_CARD_ID.replace(':card-id', payload.cardId)
+  return axios.put<interfaces.IPostCardTodoListByCardIdResponse>(url, payload)
+}
+
+export const PUT_CARD_TODO_LIST_BY_CARD_ID = (payload: interfaces.IPutCardTodoListByCardIdRequest) => {
+  const url = apiPath.PUT_CARD_TODO_LIST_BY_CARD_ID.replace(':card-id', payload.cardId)
+  return axios.put<interfaces.IPutCardTodoListByCardIdResponse>(url, payload)
+}
+
+export const DELETE_CARD_TODO_LIST_BY_CARD_ID = (payload: interfaces.IDeleteCardTodoListByCardIdRequest) => {
+  const url = apiPath.DELETE_CARD_TODO_LIST_BY_CARD_ID.replace(':card-id', payload.cardId)
+  return axios.put<interfaces.IDeleteCardTodoListByCardIdResponse>(url, payload)
+}
+
+export const POST_CARD_TODO_LIST_CONTENT_BY_CARD_ID = (payload: interfaces.IPostCardTodoListContentByCardIdRequest) => {
+  const url = apiPath.POST_CARD_TODO_LIST_CONTENT_BY_CARD_ID.replace(':card-id', payload.cardId)
+  return axios.put<interfaces.IPostCardTodoListContentByCardIdResponse>(url, payload)
+}
+
+export const PUT_CARD_TODO_LIST_CONTENT_BY_CARD_ID = (payload: interfaces.IPutCardTodoListContentByCardIdRequest) => {
+  const url = apiPath.PUT_CARD_TODO_LIST_CONTENT_BY_CARD_ID.replace(':card-id', payload.cardId)
+  return axios.put<interfaces.IPutCardTodoListContentByCardIdResponse>(url, payload)
+}
+
+export const DELETE_CARD_TODO_LIST_CONTENT_BY_CARD_ID = (
+  payload: interfaces.IDeleteCardTodoListContentByCardIdRequest
+) => {
+  const url = apiPath.DELETE_CARD_TODO_LIST_CONTENT_BY_CARD_ID.replace(':card-id', payload.cardId)
+  return axios.put<interfaces.IDeleteCardTodoListContentByCardIdResponse>(url, payload)
+}

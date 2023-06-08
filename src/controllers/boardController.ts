@@ -376,6 +376,143 @@ const boardController = (namespace: Namespace) => {
         handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.DELETE_CARD_COMMENT_RESULT)
       }
     })
+
+    // 新增卡片 todo 標題
+    socket.on(SOCKET_EVENTS_ENUM.ADD_CARD_TODO_TITLE, async (data: socketInterface.IAddNewTodoTitle) => {
+      try {
+        const { cardId, boardId, title } = data
+        await apiService.POST_CARD_TODO_LIST_BY_CARD_ID({
+          title,
+          cardId,
+          token,
+        })
+        const result = await apiService.GET_CARD_BY_CARD_ID({
+          cardId,
+          token,
+        })
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.ADD_CARD_TODO_TITLE_RESULT, {
+          code: 0, // 成功
+          result,
+        })
+      } catch (e) {
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.ADD_CARD_TODO_TITLE_RESULT)
+      }
+    })
+
+    // 編輯卡片 todo 標題
+    socket.on(SOCKET_EVENTS_ENUM.MODIFY_CARD_TODO_TITLE, async (data: socketInterface.IModifyTodoTitle) => {
+      try {
+        const { cardId, boardId, titleId, title } = data
+        await apiService.PUT_CARD_TODO_LIST_BY_CARD_ID({
+          title,
+          cardId,
+          titleId,
+          token,
+        })
+        const result = await apiService.GET_CARD_BY_CARD_ID({
+          cardId,
+          token,
+        })
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.MODIFY_CARD_TODO_TITLE_RESULT, {
+          code: 0, // 成功
+          result,
+        })
+      } catch (e) {
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.MODIFY_CARD_TODO_TITLE_RESULT)
+      }
+    })
+
+    // 刪除卡片 todo 標題
+    socket.on(SOCKET_EVENTS_ENUM.DELETE_CARD_TODO, async (data: socketInterface.IDeleteTodo) => {
+      try {
+        const { cardId, boardId, titleId } = data
+        await apiService.DELETE_CARD_TODO_LIST_BY_CARD_ID({
+          cardId,
+          titleId,
+          token,
+        })
+        const result = await apiService.GET_CARD_BY_CARD_ID({
+          cardId,
+          token,
+        })
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.DELETE_CARD_TODO_RESULT, {
+          code: 0, // 成功
+          result,
+        })
+      } catch (e) {
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.DELETE_CARD_TODO_RESULT)
+      }
+    })
+
+    // 新增卡片細項
+    socket.on(SOCKET_EVENTS_ENUM.ADD_CARD_TODO_CONTENT, async (data: socketInterface.IAddTodoContent) => {
+      try {
+        const { cardId, boardId, titleId, content } = data
+        await apiService.POST_CARD_TODO_LIST_CONTENT_BY_CARD_ID({
+          cardId,
+          titleId,
+          content,
+          token,
+        })
+        const result = await apiService.GET_CARD_BY_CARD_ID({
+          cardId,
+          token,
+        })
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.ADD_CARD_TODO_CONTENT_RESULT, {
+          code: 0, // 成功
+          result,
+        })
+      } catch (e) {
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.ADD_CARD_TODO_CONTENT_RESULT)
+      }
+    })
+
+    // 修改卡片細項
+    socket.on(SOCKET_EVENTS_ENUM.MODIFY_CARD_TODO_CONTENT, async (data: socketInterface.IModifyTodoContent) => {
+      try {
+        const { cardId, boardId, contentId, content, completed } = data
+        await apiService.PUT_CARD_TODO_LIST_CONTENT_BY_CARD_ID({
+          cardId,
+          contentId,
+          completed,
+          content,
+          token,
+        })
+        const result = await apiService.GET_CARD_BY_CARD_ID({
+          cardId,
+          token,
+        })
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.MODIFY_CARD_TODO_CONTENT_RESULT, {
+          code: 0, // 成功
+          result,
+        })
+      } catch (e) {
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.MODIFY_CARD_TODO_CONTENT_RESULT)
+      }
+    })
+
+    // 刪除卡片細項
+    socket.on(SOCKET_EVENTS_ENUM.DELETE_CARD_TODO_CONTENT, async (data: socketInterface.IDeleteTodoContent) => {
+      try {
+        const { cardId, boardId, contentId } = data
+        await apiService.DELETE_CARD_TODO_LIST_CONTENT_BY_CARD_ID({
+          cardId,
+          contentId,
+          token,
+        })
+        const result = await apiService.GET_CARD_BY_CARD_ID({
+          cardId,
+          token,
+        })
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.DELETE_CARD_TODO_CONTENT_RESULT, {
+          code: 0, // 成功
+          result,
+        })
+      } catch (e) {
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.DELETE_CARD_TODO_CONTENT_RESULT)
+      }
+    })
+
     // 離線監聽
     socket.on('disconnect', () => {
       socket?.disconnect(true)

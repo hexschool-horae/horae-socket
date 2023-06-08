@@ -104,3 +104,49 @@ export interface IDeleteCardComment {
   cardId: string
   boardId: string
 }
+
+// 新增卡片 todo 標題
+export interface IAddNewTodoTitle {
+  cardId: string
+  boardId: string
+  title: string
+}
+
+// 修改卡片 todo 標題
+export interface IModifyTodoTitle {
+  cardId: string
+  titleId: string
+  boardId: string
+  title: string
+}
+
+// 刪除卡片 todo 標題
+export interface IDeleteTodo {
+  cardId: string
+  titleId: string
+  boardId: string
+}
+
+// 新增卡片細項
+export interface IAddTodoContent {
+  cardId: string
+  titleId: string
+  boardId: string
+  content: string
+}
+
+// 編輯卡片細項
+export interface IModifyTodoContent {
+  cardId: string
+  boardId: string
+  contentId: string
+  content: string
+  completed: boolean
+}
+
+// 編輯卡片細項
+export interface IDeleteTodoContent {
+  cardId: string
+  boardId: string
+  contentId: string
+}
