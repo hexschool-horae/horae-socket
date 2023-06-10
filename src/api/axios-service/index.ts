@@ -94,7 +94,7 @@ export const PUT_CARD_COMMENT_BY_CARD_ID = (payload: interfaces.IPutCardCommentB
 
 export const DELETE_CARD_COMMENT_BY_CARD_ID = (payload: interfaces.IDeleteCardCommentByCardIdRequest) => {
   const url = apiPath.DELETE_CARD_COMMENT_BY_CARD_ID.replace(':card-id', payload.cardId)
-  return axios.put<interfaces.IDeleteCardCommentByCardIdResponse>(url, payload)
+  return axios.delete<interfaces.IDeleteCardCommentByCardIdResponse>(url, payload)
 }
 
 export const POST_CARD_TODO_LIST_BY_CARD_ID = (payload: interfaces.IPostCardTodoListByCardIdRequest) => {
