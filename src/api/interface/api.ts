@@ -37,6 +37,50 @@ export interface IGetBoardTagsByBoardIdResponse extends IBasicResponse {
   data: Array<object>
 }
 
+export interface IGetAllBoardMembersByBoardIdRequest extends IAuth {
+  boardId: string
+  hashData: string
+}
+
+interface IGetAllBoardMembersByBoardIdMember {
+  userId: {
+    _id: string
+    name: string
+    email: string
+  }
+  role: string
+  inviteHashData: string
+  _id: string
+}
+
+export interface IGetAllBoardMembersByBoardIdResponse extends IBasicResponse {
+  title: string
+  viewSet: string
+  members: Array<IGetAllBoardMembersByBoardIdMember>
+}
+
+export interface IPostBoardMembersByBoardIdAndHashDataRequest extends IAuth {
+  boardId: string
+  hashData: string
+}
+
+export interface IPostBoardMembersByBoardIdAndHashDataResponse extends IBasicResponse {}
+
+export interface IPatchBoardMembersByBoardIdRequest extends IAuth {
+  role: string
+  userId: string
+  boardId: string
+}
+
+export interface IPatchBoardMembersByBoardIdResponse extends IBasicResponse {}
+
+export interface IDeleteBoardMembersByBoardIdRequest extends IAuth {
+  userId: string
+  boardId: string
+}
+
+export interface IDeleteBoardMembersByBoardIdResponse extends IBasicResponse {}
+
 export interface IPostBoardTagsRequest extends IAuth {
   title: string
   color: string
@@ -130,6 +174,13 @@ export interface IPatchBoardListStatusByListIdRequest extends IAuth {
   listId: string
   status: 'open' | 'close'
 }
+
+export interface IPatchBoardListPositionByListIdRequest extends IAuth {
+  listId: string
+  finalPosition: number
+}
+
+export interface IPatchBoardListPositionByListIdResponse extends IBasicResponse {}
 
 export interface IPostCardTagByCardIdRequest extends IAuth {
   tagId: string
