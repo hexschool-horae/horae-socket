@@ -72,17 +72,17 @@ export const POST_BOARD_MEMBERS_BY_BOARD_ID_AND_HASH_DATA = (
 ) => {
   let url = apiPath.POST_BOARD_MEMBERS_BY_BOARD_ID_AND_HASH_DATA.replace(':board-id', payload.boardId)
   url = url.replace(':hash-data', payload.hashData)
-  return axios.get<interfaces.IPostBoardMembersByBoardIdAndHashDataResponse>(url, payload)
+  return axios.post<interfaces.IPostBoardMembersByBoardIdAndHashDataResponse>(url, payload)
 }
 
 export const PATCH_BOARD_MEMBERS_BY_BOARD_ID = (payload: interfaces.IPatchBoardMembersByBoardIdRequest) => {
   const url = apiPath.PATCH_BOARD_MEMBERS_BY_BOARD_ID.replace(':board-id', payload.boardId)
-  return axios.get<interfaces.IPatchBoardMembersByBoardIdResponse>(url, payload)
+  return axios.patch<interfaces.IPatchBoardMembersByBoardIdResponse>(url, payload)
 }
 
 export const DELETE_BOARD_MEMBERS_BY_BOARD_ID = (payload: interfaces.IDeleteBoardMembersByBoardIdRequest) => {
   const url = apiPath.DELETE_BOARD_MEMBERS_BY_BOARD_ID.replace(':board-id', payload.boardId)
-  return axios.get<interfaces.IDeleteBoardMembersByBoardIdResponse>(url, payload)
+  return axios.delete<interfaces.IDeleteBoardMembersByBoardIdResponse>(url, payload)
 }
 
 export const POST_LIST_CARD_BY_LIST_ID = (payload: interfaces.IPostBoardCardByListIdRequest) => {
