@@ -35,6 +35,22 @@ export interface IArchiveBoardStatus {
   boardId: string
 }
 
+export interface IModifyBoardMemberPermission {
+  role: string
+  userId: string
+  boardId: string
+}
+
+export interface IDeleteBoardMember {
+  userId: string
+  boardId: string
+}
+
+export interface IAddBoardMember {
+  boardId: string
+  hashData: string
+}
+
 export interface IModifyBoardTitlePayload {
   title: string
   boardId: string
@@ -67,6 +83,13 @@ export interface IModifySingleCard {
   startDate: Date
   endDate: Date
   proiority: string
+}
+
+// 移動列表位置
+export interface IModifyBoardListPosition {
+  boardId: string
+  listId: string
+  finalPosition: number
 }
 
 // 在卡片新增標籤
