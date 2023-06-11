@@ -156,3 +156,13 @@ export const DELETE_CARD_TODO_LIST_CONTENT_BY_CARD_ID = (
   const url = apiPath.DELETE_CARD_TODO_LIST_CONTENT_BY_CARD_ID.replace(':card-id', payload.cardId)
   return axios.put<interfaces.IDeleteCardTodoListContentByCardIdResponse>(url, payload)
 }
+
+export const POST_CARD_MEMBER_BY_CARD_ID = (payload: interfaces.IPostCardMemberByCardIdRequest) => {
+  const url = apiPath.POST_CARD_MEMBER_BY_CARD_ID.replace(':card-id', payload.cardId)
+  return axios.post<interfaces.IPostCardMemberByCardIdResponse>(url, payload)
+}
+
+export const DELETE_CARD_MEMBER_BY_CARD_ID = (payload: interfaces.IDeleteCardMemberByCardIdRequest) => {
+  const url = apiPath.DELETE_CARD_MEMBER_BY_CARD_ID.replace(':card-id', payload.cardId)
+  return axios.post<interfaces.IDeleteCardMemberByCardIdResponse>(url, payload)
+}
