@@ -69,6 +69,13 @@ export interface IModifySingleCard {
   proiority: string
 }
 
+// 移動列表位置
+export interface IModifyBoardListPosition {
+  boardId: string
+  listId: string
+  finalPosition: number
+}
+
 // 在卡片新增標籤
 export interface IAttachTagToCard {
   boardId: string

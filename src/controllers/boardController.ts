@@ -199,6 +199,29 @@ const boardController = (namespace: Namespace) => {
         handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.BOARD_CARD_MODIFY_RESULT)
       }
     })
+
+    // 監聽移動列表位置
+    socket.on(SOCKET_EVENTS_ENUM.BOARD_MOVE_LIST_POSITION, async (data: socketInterface.IModifyBoardListPosition) => {
+      const { listId, boardId, finalPosition } = data
+      try {
+        await apiService.PATCH_LIST_POSITION_BY_LIST_ID({
+          listId,
+          finalPosition,
+          token,
+        })
+        const result = await apiService.GET_BOARD_BY_BOARD_ID({
+          boardId,
+          token,
+        })
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.BOARD_MOVE_LIST_POSITION_RESULT, {
+          code: 0,
+          result,
+        })
+      } catch (e) {
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.BOARD_MOVE_LIST_POSITION_RESULT)
+      }
+    })
+
     // 新增看板標籤
     socket.on(SOCKET_EVENTS_ENUM.BOARD_CREATE_NEW_TAG, async (data: socketInterface.ICreateBoardNewTag) => {
       try {
