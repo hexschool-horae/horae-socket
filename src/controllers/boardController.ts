@@ -483,6 +483,7 @@ const boardController = (namespace: Namespace) => {
           cardId,
           token,
         })
+
         namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.ADD_CARD_TODO_TITLE_RESULT, {
           code: 0, // 成功
           result,

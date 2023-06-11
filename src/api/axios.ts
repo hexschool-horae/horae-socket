@@ -12,7 +12,7 @@ const instance: AxiosInstance = axios.create({
 const onRequest = (config: InternalAxiosRequestConfig) => {
   const method = config.method as string
   const token = (() => {
-    if (['post', 'patch'].indexOf(method) > -1) {
+    if (['post', 'patch', 'put'].indexOf(method) > -1) {
       const token = config.data.token as string
       delete config.data.token
       return token
@@ -50,7 +50,7 @@ function post<T>(url: string, data: unknown): Promise<T> {
 }
 
 function put<T>(url: string, data: unknown): Promise<T> {
-  return instance.post<T>(url, data).then((response: AxiosResponse) => Promise.resolve(response.data))
+  return instance.put<T>(url, data).then((response: AxiosResponse) => Promise.resolve(response.data))
 }
 
 function patch<T>(url: string, data: unknown): Promise<T> {
@@ -58,7 +58,9 @@ function patch<T>(url: string, data: unknown): Promise<T> {
 }
 
 function del<T>(url: string, params: unknown): Promise<T> {
-  return instance.delete<T>(url, { params }).then((response: AxiosResponse) => Promise.resolve(response.data))
+  return instance
+    .delete<T>(url, { params, data: params })
+    .then((response: AxiosResponse) => Promise.resolve(response.data))
 }
 
 export default {

@@ -122,12 +122,12 @@ export const PUT_CARD_COMMENT_BY_CARD_ID = (payload: interfaces.IPutCardCommentB
 
 export const DELETE_CARD_COMMENT_BY_CARD_ID = (payload: interfaces.IDeleteCardCommentByCardIdRequest) => {
   const url = apiPath.DELETE_CARD_COMMENT_BY_CARD_ID.replace(':card-id', payload.cardId)
-  return axios.put<interfaces.IDeleteCardCommentByCardIdResponse>(url, payload)
+  return axios.delete<interfaces.IDeleteCardCommentByCardIdResponse>(url, payload)
 }
 
 export const POST_CARD_TODO_LIST_BY_CARD_ID = (payload: interfaces.IPostCardTodoListByCardIdRequest) => {
   const url = apiPath.POST_CARD_TODO_LIST_BY_CARD_ID.replace(':card-id', payload.cardId)
-  return axios.put<interfaces.IPostCardTodoListByCardIdResponse>(url, payload)
+  return axios.post<interfaces.IPostCardTodoListByCardIdResponse>(url, payload)
 }
 
 export const PUT_CARD_TODO_LIST_BY_CARD_ID = (payload: interfaces.IPutCardTodoListByCardIdRequest) => {
@@ -137,12 +137,12 @@ export const PUT_CARD_TODO_LIST_BY_CARD_ID = (payload: interfaces.IPutCardTodoLi
 
 export const DELETE_CARD_TODO_LIST_BY_CARD_ID = (payload: interfaces.IDeleteCardTodoListByCardIdRequest) => {
   const url = apiPath.DELETE_CARD_TODO_LIST_BY_CARD_ID.replace(':card-id', payload.cardId)
-  return axios.put<interfaces.IDeleteCardTodoListByCardIdResponse>(url, payload)
+  return axios.delete<interfaces.IDeleteCardTodoListByCardIdResponse>(url, payload)
 }
 
 export const POST_CARD_TODO_LIST_CONTENT_BY_CARD_ID = (payload: interfaces.IPostCardTodoListContentByCardIdRequest) => {
   const url = apiPath.POST_CARD_TODO_LIST_CONTENT_BY_CARD_ID.replace(':card-id', payload.cardId)
-  return axios.put<interfaces.IPostCardTodoListContentByCardIdResponse>(url, payload)
+  return axios.post<interfaces.IPostCardTodoListContentByCardIdResponse>(url, payload)
 }
 
 export const PUT_CARD_TODO_LIST_CONTENT_BY_CARD_ID = (payload: interfaces.IPutCardTodoListContentByCardIdRequest) => {
@@ -154,7 +154,7 @@ export const DELETE_CARD_TODO_LIST_CONTENT_BY_CARD_ID = (
   payload: interfaces.IDeleteCardTodoListContentByCardIdRequest
 ) => {
   const url = apiPath.DELETE_CARD_TODO_LIST_CONTENT_BY_CARD_ID.replace(':card-id', payload.cardId)
-  return axios.put<interfaces.IDeleteCardTodoListContentByCardIdResponse>(url, payload)
+  return axios.delete<interfaces.IDeleteCardTodoListContentByCardIdResponse>(url, payload)
 }
 
 export const POST_CARD_MEMBER_BY_CARD_ID = (payload: interfaces.IPostCardMemberByCardIdRequest) => {
@@ -164,5 +164,5 @@ export const POST_CARD_MEMBER_BY_CARD_ID = (payload: interfaces.IPostCardMemberB
 
 export const DELETE_CARD_MEMBER_BY_CARD_ID = (payload: interfaces.IDeleteCardMemberByCardIdRequest) => {
   const url = apiPath.DELETE_CARD_MEMBER_BY_CARD_ID.replace(':card-id', payload.cardId)
-  return axios.post<interfaces.IDeleteCardMemberByCardIdResponse>(url, payload)
+  return axios.delete<interfaces.IDeleteCardMemberByCardIdResponse>(url, payload)
 }
