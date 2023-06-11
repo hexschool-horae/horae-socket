@@ -607,6 +607,50 @@ const boardController = (namespace: Namespace) => {
       }
     })
 
+    // 卡片成員新增
+    socket.on(SOCKET_EVENTS_ENUM.BOARD_CARD_ADD_MEMBER, async (data: socketInterface.IAddCardMember) => {
+      try {
+        const { memberId, boardId, cardId } = data
+        await apiService.POST_CARD_MEMBER_BY_CARD_ID({
+          cardId,
+          memberId,
+          token,
+        })
+        const result = await apiService.GET_CARD_BY_CARD_ID({
+          cardId,
+          token,
+        })
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.BOARD_CARD_ADD_MEMBER_RESULT, {
+          code: 0, // 成功
+          result,
+        })
+      } catch (e) {
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.BOARD_CARD_ADD_MEMBER_RESULT)
+      }
+    })
+
+    // 卡片成員刪除
+    socket.on(SOCKET_EVENTS_ENUM.BOARD_CARD_DELETE_MEMBER, async (data: socketInterface.IDeleteCardMember) => {
+      try {
+        const { memberId, boardId, cardId } = data
+        await apiService.DELETE_CARD_MEMBER_BY_CARD_ID({
+          cardId,
+          memberId,
+          token,
+        })
+        const result = await apiService.GET_CARD_BY_CARD_ID({
+          cardId,
+          token,
+        })
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.BOARD_CARD_DELETE_MEMBER_RESULT, {
+          code: 0, // 成功
+          result,
+        })
+      } catch (e) {
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.BOARD_CARD_DELETE_MEMBER_RESULT)
+      }
+    })
+
     // 離線監聽
     socket.on('disconnect', () => {
       socket?.disconnect(true)

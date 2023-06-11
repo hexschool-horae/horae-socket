@@ -29,6 +29,8 @@ export default {
   PUT_CARD_BY_ID: '/card/:card-id',
   PATCH_CARD_VISIBLE_BY_ID: '/card/:card-id/visible',
   POST_CARD_ATTACH_BY_ID: '/card/:card-id/attach',
+  POST_CARD_MEMBER_BY_CARD_ID: '/card/:card-id/member',
+  DELETE_CARD_MEMBER_BY_CARD_ID: '/card/:card-id/member',
 
   // 實作開始
   PATCH_BOARD_LIST_BY_ID: '/board/:board-id/list/:list-id',
