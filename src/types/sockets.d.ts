@@ -35,6 +35,22 @@ export interface IArchiveBoardStatus {
   boardId: string
 }
 
+export interface IModifyBoardMemberPermission {
+  role: string
+  userId: string
+  boardId: string
+}
+
+export interface IDeleteBoardMember {
+  userId: string
+  boardId: string
+}
+
+export interface IAddBoardMember {
+  boardId: string
+  hashData: string
+}
+
 export interface IModifyBoardTitlePayload {
   title: string
   boardId: string

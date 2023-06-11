@@ -86,6 +86,76 @@ const boardController = (namespace: Namespace) => {
       }
     })
 
+    // 看板設定成員權限
+    socket.on(
+      SOCKET_EVENTS_ENUM.BOARD_MODIFY_MEMBER_PERMISSION,
+      async (data: socketInterface.IModifyBoardMemberPermission) => {
+        try {
+          const { role, userId, boardId } = data
+          await apiService.PATCH_BOARD_MEMBERS_BY_BOARD_ID({
+            role,
+            userId,
+            boardId,
+            token,
+          })
+          const result = await apiService.GET_BOARDS_ALL_MEMBERS_BY_ID({
+            boardId,
+            token,
+          })
+          namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.BOARD_MODIFY_MEMBER_PERMISSION_RESULT, {
+            code: 0, // 成功
+            result,
+          })
+        } catch (e) {
+          handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.BOARD_MODIFY_MEMBER_PERMISSION_RESULT)
+        }
+      }
+    )
+
+    // 看板刪除成員
+    socket.on(SOCKET_EVENTS_ENUM.BOARD_DELETE_MEMBER, async (data: socketInterface.IDeleteBoardMember) => {
+      try {
+        const { userId, boardId } = data
+        await apiService.DELETE_BOARD_MEMBERS_BY_BOARD_ID({
+          userId,
+          boardId,
+          token,
+        })
+        const result = await apiService.GET_BOARDS_ALL_MEMBERS_BY_ID({
+          boardId,
+          token,
+        })
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.BOARD_DELETE_MEMBER_RESULT, {
+          code: 0, // 成功
+          result,
+        })
+      } catch (e) {
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.BOARD_DELETE_MEMBER_RESULT)
+      }
+    })
+
+    // 看板新增成員
+    socket.on(SOCKET_EVENTS_ENUM.BOARD_ADD_MEMBER, async (data: socketInterface.IAddBoardMember) => {
+      try {
+        const { hashData, boardId } = data
+        await apiService.POST_BOARD_MEMBERS_BY_BOARD_ID_AND_HASH_DATA({
+          hashData,
+          boardId,
+          token,
+        })
+        const result = await apiService.GET_BOARDS_ALL_MEMBERS_BY_ID({
+          boardId,
+          token,
+        })
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.BOARD_ADD_MEMBER_RESULT, {
+          code: 0, // 成功
+          result,
+        })
+      } catch (e) {
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.BOARD_ADD_MEMBER_RESULT)
+      }
+    })
+
     // 監聽建立看板列表
     socket.on(SOCKET_EVENTS_ENUM.BOARD_CREATE_LIST, async (data: socketInterface.IBoardCreatePayload) => {
       try {

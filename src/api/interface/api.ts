@@ -39,7 +39,6 @@ export interface IGetBoardTagsByBoardIdResponse extends IBasicResponse {
 
 export interface IGetAllBoardMembersByBoardIdRequest extends IAuth {
   boardId: string
-  hashData: string
 }
 
 interface IGetAllBoardMembersByBoardIdMember {
