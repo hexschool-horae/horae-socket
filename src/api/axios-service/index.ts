@@ -164,5 +164,5 @@ export const POST_CARD_MEMBER_BY_CARD_ID = (payload: interfaces.IPostCardMemberB
 
 export const DELETE_CARD_MEMBER_BY_CARD_ID = (payload: interfaces.IDeleteCardMemberByCardIdRequest) => {
   const url = apiPath.DELETE_CARD_MEMBER_BY_CARD_ID.replace(':card-id', payload.cardId)
-  return axios.post<interfaces.IDeleteCardMemberByCardIdResponse>(url, payload)
+  return axios.delete<interfaces.IDeleteCardMemberByCardIdResponse>(url, payload)
 }
