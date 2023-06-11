@@ -173,3 +173,17 @@ export interface IDeleteTodoContent {
   boardId: string
   contentId: string
 }
+
+// 卡片成員新增
+export interface IAddCardMember {
+  cardId: string
+  memberId: string
+  boardId: string
+}
+
+// 卡片成員移除
+export interface IDeleteCardMember {
+  cardId: string
+  memberId: string
+  boardId: string
+}

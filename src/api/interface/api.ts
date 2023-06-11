@@ -262,3 +262,17 @@ export interface IDeleteCardTodoListContentByCardIdRequest extends IAuth {
 }
 
 export interface IDeleteCardTodoListContentByCardIdResponse extends IBasicResponse {}
+
+export interface IPostCardMemberByCardIdRequest extends IAuth {
+  cardId: string
+  memberId: string
+}
+
+export interface IPostCardMemberByCardIdResponse extends IBasicResponse {}
+
+export interface IDeleteCardMemberByCardIdRequest extends IAuth {
+  cardId: string
+  memberId: string
+}
+
+export interface IDeleteCardMemberByCardIdResponse extends IBasicResponse {}
