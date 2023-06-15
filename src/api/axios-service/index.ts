@@ -101,7 +101,7 @@ export const PATCH_CARD_BY_CARD_ID = (payload: interfaces.IPatchCardByCardIdRequ
 }
 
 export const POST_CARD_TAG_BY_CARD_ID = (payload: interfaces.IPostCardTagByCardIdRequest) => {
-  const url = apiPath.PATCH_CARD_BY_CARD_ID.replace(':card-id', payload.cardId)
+  const url = apiPath.POST_CARD_TAG_BY_CARD_ID.replace(':card-id', payload.cardId)
   return axios.post<interfaces.IPostCardTagByCardIdResponse>(url, payload)
 }
 
