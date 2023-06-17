@@ -178,6 +178,11 @@ export interface IPatchBoardListPositionByListIdRequest extends IAuth {
   listId: string
   finalPosition: number
 }
+export interface IPatchBoardCardPositionByCardIdRequest extends IAuth {
+  cardId: string
+  finalListId: string
+  finalPosition: number
+}
 
 export interface IPatchBoardListPositionByListIdResponse extends IBasicResponse {}
 

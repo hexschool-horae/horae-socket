@@ -42,6 +42,11 @@ export const PATCH_LIST_POSITION_BY_LIST_ID = (payload: interfaces.IPatchBoardLi
   return axios.patch<interfaces.IPatchBoardListPositionByListIdResponse>(url, payload)
 }
 
+export const PATCH_CARD_POSITION_BY_CARD_ID = (payload: interfaces.IPatchBoardCardPositionByCardIdRequest) => {
+  const url = apiPath.PATCH_CARD_POSITION_BY_CARD_ID.replace(':card-id', payload.cardId)
+  return axios.patch<interfaces.IPatchBoardCardPositionByCardIdRequest>(url, payload)
+}
+
 export const POST_BOARD_TAGS_BY_BOARD_ID = (payload: interfaces.IPostBoardTagsRequest) => {
   const url = apiPath.POST_BOARD_TAGS_BY_BOARD_ID.replace(':board-id', payload.boardId)
   return axios.post(url, payload)

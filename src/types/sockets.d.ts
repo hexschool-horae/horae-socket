@@ -92,6 +92,14 @@ export interface IModifyBoardListPosition {
   finalPosition: number
 }
 
+// 移動卡片位置
+export interface IModifyBoardCardPosition {
+  boardId: string
+  cardId: string
+  finalListId: string
+  finalListPosition: number
+}
+
 // 在卡片新增標籤
 export interface IAttachTagToCard {
   boardId: string
