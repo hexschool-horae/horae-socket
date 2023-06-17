@@ -281,3 +281,10 @@ export interface IDeleteCardMemberByCardIdRequest extends IAuth {
 }
 
 export interface IDeleteCardMemberByCardIdResponse extends IBasicResponse {}
+
+export interface IAddCardAttachmentByIdRequest extends IAuth {
+  cardId: string
+  file: File
+}
+
+export interface IAddCardAttachmentByIdResponse extends IBasicResponse {}

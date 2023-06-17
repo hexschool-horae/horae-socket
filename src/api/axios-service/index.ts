@@ -171,3 +171,13 @@ export const DELETE_CARD_MEMBER_BY_CARD_ID = (payload: interfaces.IDeleteCardMem
   const url = apiPath.DELETE_CARD_MEMBER_BY_CARD_ID.replace(':card-id', payload.cardId)
   return axios.delete<interfaces.IDeleteCardMemberByCardIdResponse>(url, payload)
 }
+
+export const POST_CARD_ATTACHMENT_BY_CARD_ID = (payload: interfaces.IAddCardAttachmentByIdRequest) => {
+  const url = apiPath.POST_CARD_ATTACHMENT_BY_CARD_ID.replace(':card-id', payload.cardId)
+  return axios.post<interfaces.IAddCardAttachmentByIdResponse>(url, payload)
+}
+
+export const DELETE_CARD_ATTACHMENT_BY_CARD_ID = (payload: interfaces.IDeleteCardAttachmentByCardIdRequest) => {
+  const url = apiPath.DELETE_CARD_ATTACHMENT_BY_CARD_ID.replace(':card-id', payload.cardId)
+  return axios.delete<interfaces.IDeleteCardAttachmentByCardIdResponse>(url, payload)
+}
