@@ -187,3 +187,17 @@ export interface IDeleteCardMember {
   memberId: string
   boardId: string
 }
+
+// 卡片新增附件
+export interface IAddCardAttachment {
+  cardId: string
+  boardId: string
+  file: File
+}
+
+// 卡片刪除附件
+export interface IDeleteCardAttachment {
+  cardId: string
+  boardId: string
+  fileId: string
+}

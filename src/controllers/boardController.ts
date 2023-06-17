@@ -650,6 +650,50 @@ const boardController = (namespace: Namespace) => {
       }
     })
 
+    // 卡片增加附件
+    socket.on(SOCKET_EVENTS_ENUM.BOARD_CARD_UPLOAD_ATTACHMENT, async (data: socketInterface.IAddCardAttachment) => {
+      try {
+        const { file, boardId, cardId } = data
+        await apiService.POST_CARD_ATTACHMENT_BY_CARD_ID({
+          cardId,
+          file,
+          token,
+        })
+        const result = await apiService.GET_CARD_BY_CARD_ID({
+          cardId,
+          token,
+        })
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.BOARD_CARD_UPLOAD_ATTACHMENT_RESULT, {
+          code: 0, // 成功
+          result,
+        })
+      } catch (e) {
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.BOARD_CARD_UPLOAD_ATTACHMENT_RESULT)
+      }
+    })
+
+    // 卡片刪除附件
+    socket.on(SOCKET_EVENTS_ENUM.BOARD_CARD_DELETE_ATTACHMENT, async (data: socketInterface.IDeleteCardAttachment) => {
+      try {
+        const { fileId, boardId, cardId } = data
+        await apiService.DELETE_CARD_ATTACHMENT_BY_CARD_ID({
+          cardId,
+          fileId,
+          token,
+        })
+        const result = await apiService.GET_CARD_BY_CARD_ID({
+          cardId,
+          token,
+        })
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.BOARD_CARD_DELETE_ATTACHMENT_RESULT, {
+          code: 0, // 成功
+          result,
+        })
+      } catch (e) {
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.BOARD_CARD_DELETE_ATTACHMENT_RESULT)
+      }
+    })
+
     // 離線監聽
     socket.on('disconnect', () => {
       socket?.disconnect(true)

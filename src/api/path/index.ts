@@ -62,4 +62,6 @@ export default {
   POST_CARD_TODO_LIST_CONTENT_BY_CARD_ID: '/card/:card-id/todolist-content',
   PUT_CARD_TODO_LIST_CONTENT_BY_CARD_ID: '/card/:card-id/todolist-content',
   DELETE_CARD_TODO_LIST_CONTENT_BY_CARD_ID: '/card/:card-id/todolist-content',
+  POST_CARD_ATTACHMENT_BY_CARD_ID: '/card/:card-id/attachment',
+  DELETE_CARD_ATTACHMENT_BY_CARD_ID: '/card/:card-id/attachment',
 }
