@@ -292,6 +292,29 @@ const boardController = (namespace: Namespace) => {
       }
     })
 
+     // 監聽移動列表位置
+     socket.on(SOCKET_EVENTS_ENUM.BOARD_MOVE_CARD_POSITION, async (data: socketInterface.IModifyBoardCardPosition) => {
+      const {  boardId, cardId, finalListId, finalListPosition } = data
+      try {
+        await apiService.PATCH_CARD_POSITION_BY_CARD_ID({
+          cardId,
+          finalListId,
+          finalPosition: finalListPosition,
+          token,
+        })
+        const result = await apiService.GET_BOARD_BY_BOARD_ID({
+          boardId,
+          token,
+        })
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.BOARD_MOVE_CARD_POSITION_RESULT, {
+          code: 0,
+          result,
+        })
+      } catch (e) {
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.BOARD_MOVE_CARD_POSITION_RESULT)
+      }
+    })
+
     // 新增看板標籤
     socket.on(SOCKET_EVENTS_ENUM.BOARD_CREATE_NEW_TAG, async (data: socketInterface.ICreateBoardNewTag) => {
       try {

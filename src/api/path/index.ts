@@ -44,6 +44,7 @@ export default {
   PATCH_LIST_TITLE_BY_LIST_ID: '/list/:list-id/title',
   PATCH_LIST_STATUS_BY_LIST_ID: '/list/:list-id/status',
   PATCH_LIST_POSITION_BY_LIST_ID: '/list/:list-id/position',
+  PATCH_CARD_POSITION_BY_CARD_ID: '/card/:card-id/position',
   POST_BOARD_TAGS_BY_BOARD_ID: '/board/:board-id/tags',
   PUT_BOARD_TAGS_BY_BOARD_ID: '/board/:board-id/tags',
   DELETE_BOARD_TAGS_BY_BOARD_ID: '/board/:board-id/tags',
