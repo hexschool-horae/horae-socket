@@ -201,3 +201,14 @@ export interface IDeleteCardAttachment {
   boardId: string
   fileId: string
 }
+
+// 看板新增封面
+export interface IBoardUpdateCover {
+  boardId: string
+  fileURL: string
+}
+
+// 看板新增封面
+export interface IBoardDeleteCover {
+  boardId: string
+}
