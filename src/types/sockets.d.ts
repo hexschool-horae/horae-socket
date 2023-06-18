@@ -97,7 +97,7 @@ export interface IModifyBoardCardPosition {
   boardId: string
   cardId: string
   finalListId: string
-  finalListPosition: number
+  finalPosition: number
 }
 
 // 在卡片新增標籤
