@@ -86,6 +86,49 @@ const boardController = (namespace: Namespace) => {
       }
     })
 
+    // 看板新增封面
+    socket.on(SOCKET_EVENTS_ENUM.BOARD_UPDATE_COVER, async (data: socketInterface.IBoardUpdateCover) => {
+      try {
+        const { fileURL, boardId } = data
+        await apiService.PATCH_BOARD_COVER_BY_BOARD_ID({
+          fileURL,
+          boardId,
+          token,
+        })
+        const result = await apiService.GET_BOARD_BY_BOARD_ID({
+          boardId,
+          token,
+        })
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.BOARD_UPDATE_COVER_RESULT, {
+          code: 0, // 成功
+          result,
+        })
+      } catch (e) {
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.BOARD_UPDATE_COVER_RESULT)
+      }
+    })
+
+    // 看板刪除封面
+    socket.on(SOCKET_EVENTS_ENUM.BOARD_DELETE_COVER, async (data: socketInterface.IBoardDeleteCover) => {
+      try {
+        const { boardId } = data
+        await apiService.DELETE_BOARD_COVER_BY_BOARD_ID({
+          boardId,
+          token,
+        })
+        const result = await apiService.GET_BOARD_BY_BOARD_ID({
+          boardId,
+          token,
+        })
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.BOARD_DELETE_COVER_RESULT, {
+          code: 0, // 成功
+          result,
+        })
+      } catch (e) {
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.BOARD_DELETE_COVER_RESULT)
+      }
+    })
+
     // 看板設定成員權限
     socket.on(
       SOCKET_EVENTS_ENUM.BOARD_MODIFY_MEMBER_PERMISSION,

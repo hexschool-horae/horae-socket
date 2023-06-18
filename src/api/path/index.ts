@@ -65,4 +65,6 @@ export default {
   DELETE_CARD_TODO_LIST_CONTENT_BY_CARD_ID: '/card/:card-id/todolist-content',
   POST_CARD_ATTACHMENT_BY_CARD_ID: '/card/:card-id/attachment',
   DELETE_CARD_ATTACHMENT_BY_CARD_ID: '/card/:card-id/attachment',
+  PATCH_BOARD_COVER_BY_BOARD_ID: '/board/:board-id/cover',
+  DELETE_BOARD_COVER_BY_BOARD_ID: '/board/:board-id/cover',
 }
