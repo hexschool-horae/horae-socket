@@ -23,10 +23,22 @@ const onRequest = (config: InternalAxiosRequestConfig) => {
     }
     return ''
   })()
+
+  // upload
+  if (config.data?.file) {
+    config.headers['Content-Type'] = 'multipart/form-data'
+    const formData = new FormData()
+    formData.append('file', config.data.file)
+    config.data = formData
+  } else {
+    config.headers['Content-Type'] = 'application/json'
+  }
   // if (!token) {
   //   return Promise.reject('該請求沒有 token')
   // }
   config.headers.Authorization = token
+  console.log('e ------------- config ------------', config)
+  console.log('config.data', config.data)
   return config
 }
 
