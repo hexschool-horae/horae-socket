@@ -292,14 +292,14 @@ const boardController = (namespace: Namespace) => {
       }
     })
 
-     // 監聽移動列表位置
-     socket.on(SOCKET_EVENTS_ENUM.BOARD_MOVE_CARD_POSITION, async (data: socketInterface.IModifyBoardCardPosition) => {
-      const {  boardId, cardId, finalListId, finalListPosition } = data
+    // 監聽移動列表位置
+    socket.on(SOCKET_EVENTS_ENUM.BOARD_MOVE_CARD_POSITION, async (data: socketInterface.IModifyBoardCardPosition) => {
+      const { boardId, cardId, finalListId, finalPosition } = data
       try {
         await apiService.PATCH_CARD_POSITION_BY_CARD_ID({
           cardId,
           finalListId,
-          finalPosition: finalListPosition,
+          finalPosition,
           token,
         })
         const result = await apiService.GET_BOARD_BY_BOARD_ID({
