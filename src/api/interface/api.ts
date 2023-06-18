@@ -288,3 +288,23 @@ export interface IAddCardAttachmentByIdRequest extends IAuth {
 }
 
 export interface IAddCardAttachmentByIdResponse extends IBasicResponse {}
+
+export interface IDeleteCardAttachmentByCardIdRequest extends IAuth {
+  cardId: string
+  fileId: string
+}
+
+export interface IDeleteCardAttachmentByCardIdResponse extends IBasicResponse {}
+
+export interface IUpdateBoardCoverRequest extends IAuth {
+  boardId: string
+  fileURL: string
+}
+
+export interface IUpdateBoardCoverResponse extends IBasicResponse {}
+
+export interface IDeleteBoardCoverRequest extends IAuth {
+  boardId: string
+}
+
+export interface IDeleteBoardCoverResponse extends IBasicResponse {}

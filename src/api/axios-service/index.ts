@@ -181,3 +181,13 @@ export const DELETE_CARD_ATTACHMENT_BY_CARD_ID = (payload: interfaces.IDeleteCar
   const url = apiPath.DELETE_CARD_ATTACHMENT_BY_CARD_ID.replace(':card-id', payload.cardId)
   return axios.delete<interfaces.IDeleteCardAttachmentByCardIdResponse>(url, payload)
 }
+
+export const PATCH_BOARD_COVER_BY_BOARD_ID = (payload: interfaces.IUpdateBoardCoverRequest) => {
+  const url = apiPath.PATCH_BOARD_COVER_BY_BOARD_ID.replace(':board-id', payload.boardId)
+  return axios.patch<interfaces.IUpdateBoardCoverResponse>(url, payload)
+}
+
+export const DELETE_BOARD_COVER_BY_BOARD_ID = (payload: interfaces.IDeleteBoardCoverRequest) => {
+  const url = apiPath.DELETE_BOARD_COVER_BY_BOARD_ID.replace(':board-id', payload.boardId)
+  return axios.delete<interfaces.IDeleteBoardCoverResponse>(url, payload)
+}
