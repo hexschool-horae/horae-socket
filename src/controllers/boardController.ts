@@ -762,6 +762,28 @@ const boardController = (namespace: Namespace) => {
       }
     })
 
+    // 修改看板主題
+    socket.on(SOCKET_EVENTS_ENUM.BOARD_MODIFY_THEME, async (data: socketInterface.IModifyBoardTheme) => {
+      try {
+        const { covercolor, boardId } = data
+        await apiService.PATCH_BOARD_THEME_BY_BOARID_ID({
+          covercolor,
+          boardId,
+          token,
+        })
+        const result = await apiService.GET_BOARD_BY_BOARD_ID({
+          boardId,
+          token,
+        })
+        namespace.to(boardId).emit(SOCKET_EVENTS_ENUM.BOARD_MODIFY_THEME_RESULT, {
+          code: 0, // 成功
+          result,
+        })
+      } catch (e) {
+        handlerError(e as ErrorType, socket, SOCKET_EVENTS_ENUM.BOARD_MODIFY_THEME_RESULT)
+      }
+    })
+
     // 離線監聽
     socket.on('disconnect', () => {
       socket?.disconnect(true)

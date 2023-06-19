@@ -309,3 +309,10 @@ export interface IDeleteBoardCoverRequest extends IAuth {
 }
 
 export interface IDeleteBoardCoverResponse extends IBasicResponse {}
+
+export interface IPatchBoardThemeByBoardIdRequest extends IAuth {
+  covercolor: string
+  boardId: string
+}
+
+export interface IPatchBoardThemeByBoardIdResponse extends IBasicResponse {}
