@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosResponse, AxiosError, InternalAxiosRequestConfig } from 'axios'
+import axios, { AxiosInstance, AxiosResponse, AxiosError, InternalAxiosRequestConfig, AxiosRequestConfig } from 'axios'
 
 const baseURL = 'https://horae-api-5x0d.onrender.com/'
 
@@ -10,6 +10,10 @@ const instance: AxiosInstance = axios.create({
 })
 
 const onRequest = (config: InternalAxiosRequestConfig) => {
+  if (config.headers['X-Skip-Interceptor']) {
+    delete config.headers.ignoreInterceptor
+    return config
+  }
   const method = config.method as string
   const token = (() => {
     if (['post', 'patch', 'put'].indexOf(method) > -1) {
@@ -45,8 +49,8 @@ function get<T>(url: string, params: unknown): Promise<T> {
   return instance.get<T>(url, { params }).then((response: AxiosResponse) => Promise.resolve(response.data))
 }
 
-function post<T>(url: string, data: unknown): Promise<T> {
-  return instance.post<T>(url, data).then((response: AxiosResponse) => Promise.resolve(response.data))
+function post<T>(url: string, data: unknown, config?: AxiosRequestConfig): Promise<T> {
+  return instance.post<T>(url, data, config).then((response: AxiosResponse) => Promise.resolve(response.data))
 }
 
 function put<T>(url: string, data: unknown): Promise<T> {

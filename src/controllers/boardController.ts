@@ -720,10 +720,11 @@ const boardController = (namespace: Namespace) => {
     // 卡片增加附件
     socket.on(SOCKET_EVENTS_ENUM.BOARD_CARD_UPLOAD_ATTACHMENT, async (data: socketInterface.IAddCardAttachment) => {
       try {
-        const { file, boardId, cardId } = data
+        const { file, fileName, boardId, cardId } = data
         await apiService.POST_CARD_ATTACHMENT_BY_CARD_ID({
           cardId,
           file,
+          fileName,
           token,
         })
         const result = await apiService.GET_CARD_BY_CARD_ID({
