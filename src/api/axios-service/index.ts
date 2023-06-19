@@ -200,3 +200,8 @@ export const DELETE_BOARD_COVER_BY_BOARD_ID = (payload: interfaces.IDeleteBoardC
   const url = apiPath.DELETE_BOARD_COVER_BY_BOARD_ID.replace(':board-id', payload.boardId)
   return axios.delete<interfaces.IDeleteBoardCoverResponse>(url, payload)
 }
+
+export const PATCH_BOARD_THEME_BY_BOARID_ID = (payload: interfaces.IPatchBoardThemeByBoardIdRequest) => {
+  const url = apiPath.PATCH_BOARD_THEME_BY_BOARID_ID.replace(':board-id', payload.boardId)
+  return axios.patch<interfaces.IPatchBoardThemeByBoardIdResponse>(url, payload)
+}

@@ -221,3 +221,9 @@ export interface IBoardUpdateCover {
 export interface IBoardDeleteCover {
   boardId: string
 }
+
+// 修改看板主題
+export interface IModifyBoardTheme {
+  boardId: string
+  covercolor: string
+}
