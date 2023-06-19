@@ -1,6 +1,7 @@
 import axios from '../axios'
 import apiPath from '../path'
 import * as interfaces from '../interface/api'
+import FormData from 'form-data'
 
 export const PATCH_BOARD_VIEW_SET_BY_BOARD_ID = (payload: interfaces.IModifyBoardViewPermissionRequest) => {
   const url = apiPath.PATCH_BOARD_VIEW_SET_BY_BOARD_ID.replace(':board-id', payload.boardId)
@@ -174,7 +175,15 @@ export const DELETE_CARD_MEMBER_BY_CARD_ID = (payload: interfaces.IDeleteCardMem
 
 export const POST_CARD_ATTACHMENT_BY_CARD_ID = (payload: interfaces.IAddCardAttachmentByIdRequest) => {
   const url = apiPath.POST_CARD_ATTACHMENT_BY_CARD_ID.replace(':card-id', payload.cardId)
-  return axios.post<interfaces.IAddCardAttachmentByIdResponse>(url, payload)
+  const formData = new FormData()
+  formData.append('file', payload.file, { filename: payload.fileName })
+  return axios.post<interfaces.IAddCardAttachmentByIdResponse>(url, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      Authorization: payload.token,
+      'X-Skip-Interceptor': true,
+    },
+  })
 }
 
 export const DELETE_CARD_ATTACHMENT_BY_CARD_ID = (payload: interfaces.IDeleteCardAttachmentByCardIdRequest) => {

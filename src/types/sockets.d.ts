@@ -201,6 +201,7 @@ export interface IAddCardAttachment {
   cardId: string
   boardId: string
   file: File
+  fileName: string
 }
 
 // 卡片刪除附件
