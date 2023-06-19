@@ -66,4 +66,5 @@ export default {
   DELETE_CARD_ATTACHMENT_BY_CARD_ID: '/card/:card-id/attachment',
   PATCH_BOARD_COVER_BY_BOARD_ID: '/board/:board-id/cover',
   DELETE_BOARD_COVER_BY_BOARD_ID: '/board/:board-id/cover',
+  PATCH_BOARD_THEME_BY_BOARID_ID: '/board/:board-id/theme',
 }
